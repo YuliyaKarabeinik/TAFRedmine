@@ -1,57 +1,52 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using System.Collections.Generic;
 using TAFProject.UIUtils.Driver;
-using TAFProject.UIUtils.PageObjects;
 
 namespace TAFProject.Utils
 {
-    class Navigation: INavigation
+    public enum Pages
     {
-		static Browser browser = Browser.Instance;
+        Login, Home, Projects, NewProject, CurrentProject, NewIssue, Activity, Issues
+    }
+    class RedmineNavigation
+    {
+        static Browser browser = Browser.Instance;
+        public string CurrentUrl { get; private set; }
+        private string CurrentProjectIdentifier { get; } = "";
 
-
-	    public string BaseUrl { get; set; } = "http://icerow.com/";
-		public string AddProjectUrl { get; set; } = "http://icerow.com/projects/new";
-
-	    public string getActivityUrl(string projectName)
-	    {
-		    string activityUrl = $"http:////icerow.com//projects//{projectName}//activity";
-			return activityUrl;
-		}
-	    public string getAddIssueUrl(string projectName)
-	    {
-		    string addIssueUrl = $"http:////icerow.com//{projectName}//issues//new";
-			return addIssueUrl;
-	    }
-		
-	
-		public void Back()
+        readonly Dictionary<Pages, string> urls = new Dictionary<Pages, string>()
         {
-           // throw new NotImplementedException();
+            { Pages.Login, "http://icerow.com/"},
+            { Pages.Home, "http://icerow.com/"},
+            { Pages.Projects, "http://icerow.com/projects/"},
+            { Pages.NewProject, "http://icerow.com/projects/new"},
+            { Pages.CurrentProject, $"http:////icerow.com//projects//{CurrentProjectIdentifier}"},
+            { Pages.NewIssue, $"http:////icerow.com//{CurrentProjectIdentifier}//issues//new"},
+            { Pages.Activity, $"http:////icerow.com//projects//{CurrentProjectIdentifier}//activity"},
+            { Pages.Issues, $"http:////icerow.com//projects//{CurrentProjectIdentifier}//issues"}
+        };
+
+        public string GetActivityUrl(string projectName)
+        {
+            string activityUrl = $"http:////icerow.com//projects//{projectName}//activity";
+            return activityUrl;
         }
 
-        public void Forward()
+        public string GetAddIssueUrl(string projectName)
         {
-            // throw new NotImplementedException();
+            string addIssueUrl = $"http:////icerow.com//{projectName}//issues//new";
+            return addIssueUrl;
         }
 
-	    public void GoToUrl(string url)
-	    {
-		    browser.GoToUrl(url);
-		}
-	/*	public void GoToUrl(BasePage page)
+        public void GoToUrl(string url)
         {
-          browser.GoToUrl(page.BaseUrl);
-        }
-*/
-        public void GoToUrl(Uri url)
-        {
-            throw new NotImplementedException();
+            browser.GoToUrl(url);
+            CurrentUrl = url;
         }
 
-        public void Refresh()
-        {
-            throw new NotImplementedException();
-        }
+        //public void GoTo<>(Pages page)
+        //{
+        //    browser.GoToUrl(urls[page]);
+        //}
+
     }
 }
