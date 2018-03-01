@@ -4,6 +4,7 @@ using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
+    //tanya comment
 	class IssueTableElement: BaseElement
 	{
 		static readonly string issueTableXPathLocator = "//div[@id='content']//table";
