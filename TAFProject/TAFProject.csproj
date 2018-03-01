@@ -66,7 +66,7 @@
     <Compile Include="UIUtils\Driver\BaseTest.cs" />
     <Compile Include="UIUtils\Driver\Browser.cs" />
     <Compile Include="UIUtils\Driver\BrowserFactory.cs" />
-    <Compile Include="UIUtils\PageObjects\ActivityPAge.cs" />
+    <Compile Include="UIUtils\PageObjects\ActivityPage.cs" />
     <Compile Include="UIUtils\PageObjects\AddIssuePage.cs" />
     <Compile Include="UIUtils\PageObjects\AddProjectPage.cs" />
     <Compile Include="UIUtils\PageObjects\BasePage.cs" />

@@ -21,10 +21,5 @@ namespace TAFProject.UIUtils.PageObjects
 		{
 			return activityContent.FindElements(By.XPath("//dl//a")).Any(element => element.Text.Contains(issueName));
 		}
-
-		//public override void GoToPage()
-		//{
-		//	browser.GoToUrl(BaseUrl);
-		//}
 	}
 }
