@@ -6,8 +6,6 @@ namespace TAFProject.Utils
 {
     public static class Steps
     {
-        static RedmineNavigation navigation = new RedmineNavigation();
-
         public static HomePage Login(string login, string password)
         {
             LoginPage loginPage = new LoginPage();
@@ -40,7 +38,7 @@ namespace TAFProject.Utils
         public static AddProjectPage AddProject(string projectName, string projectIdentifier)
         {
 
-            navigation.GoToUrl(navigation.AddProjectUrl);
+            RedmineNavigation.GoTo(Pages.NewProject);
             var addProject = new AddProjectPage();
             Thread.Sleep(4000);
             addProject.CreateNewProject(projectName, projectIdentifier);

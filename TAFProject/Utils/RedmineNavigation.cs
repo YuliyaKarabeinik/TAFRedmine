@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TAFProject.UIUtils.Driver;
+using TAFProject.UIUtils.PageObjects;
 
 namespace TAFProject.Utils
 {
@@ -7,13 +9,13 @@ namespace TAFProject.Utils
     {
         Login, Home, Projects, NewProject, CurrentProject, NewIssue, Activity, Issues
     }
-    class RedmineNavigation
-    {
+    static class RedmineNavigation
+    { 
         static Browser browser = Browser.Instance;
-        public string CurrentUrl { get; private set; }
-        private string CurrentProjectIdentifier { get; } = "";
+        public static string CurrentUrl { get; private set; }
+        private static string CurrentProjectIdentifier { get; } = "";
 
-        readonly Dictionary<Pages, string> urls = new Dictionary<Pages, string>()
+        static readonly Dictionary<Pages, string> urls = new Dictionary<Pages, string>()
         {
             { Pages.Login, "http://icerow.com/"},
             { Pages.Home, "http://icerow.com/"},
@@ -24,29 +26,18 @@ namespace TAFProject.Utils
             { Pages.Activity, $"http:////icerow.com//projects//{CurrentProjectIdentifier}//activity"},
             { Pages.Issues, $"http:////icerow.com//projects//{CurrentProjectIdentifier}//issues"}
         };
-
-        public string GetActivityUrl(string projectName)
-        {
-            string activityUrl = $"http:////icerow.com//projects//{projectName}//activity";
-            return activityUrl;
-        }
-
-        public string GetAddIssueUrl(string projectName)
-        {
-            string addIssueUrl = $"http:////icerow.com//{projectName}//issues//new";
-            return addIssueUrl;
-        }
-
-        public void GoToUrl(string url)
+        
+        public static void GoToUrl(string url)
         {
             browser.GoToUrl(url);
             CurrentUrl = url;
         }
 
-        //public void GoTo<>(Pages page)
-        //{
-        //    browser.GoToUrl(urls[page]);
-        //}
-
+        public static TPage GoTo<TPage>(Pages page, string projectIdentifier = "") where TPage : BasePage, new()
+        {
+            browser.GoToUrl($"urls[page]/{projectIdentifier}");
+            CurrentUrl = urls[page];
+            return new TPage();
+        }
     }
 }

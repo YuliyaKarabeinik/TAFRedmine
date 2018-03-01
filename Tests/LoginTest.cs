@@ -9,7 +9,7 @@ namespace Tests
     class LoginTest : BaseTest
     {
         [SetUp]
-        public void InitTest()
+        public override void InitTest()
         {
             if (Steps.IsLoggedIn(login, password))
                 Steps.LogOut();
