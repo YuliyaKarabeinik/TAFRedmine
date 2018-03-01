@@ -13,7 +13,7 @@ namespace TAFProject.UIUtils.Driver
 		[OneTimeSetUp]
         public virtual void InitTest()
 		{
-
+			
 			Logging.InitLogger(); // logger initialization
 			Logging.Log.Info($"Settings: " +
 			                 $"\nCurrent browser: {Configuration.Browser}" +
@@ -22,7 +22,7 @@ namespace TAFProject.UIUtils.Driver
 			browser.WindowMaximise();
 			browser.GoToUrl(Configuration.StartUrl);
 			
-			//	Steps.Login(login, password);
+			//Steps.Login(login, password);
 		}
 		
 

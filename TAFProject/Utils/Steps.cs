@@ -16,11 +16,13 @@ namespace TAFProject.Utils
 		public static HomePage Login(string login, string password)
 		{
 			LoginPage loginPage = new LoginPage();
-			HomePage homepage = loginPage.Login(login, password);
+			loginPage.InsertLogin(login);
+			loginPage.InsertPassword(password);
+			HomePage homepage = loginPage.ClickLoginButton();
 			return homepage;
 		}
 
-		public static bool IsLoggedIn(string login, string password)
+	/*	public static bool IsLoggedIn(string login, string password)
 		{
 			try
 			{
@@ -32,6 +34,12 @@ namespace TAFProject.Utils
 				return false;
 
 			}
+		}*/
+
+		public static bool IsLoggedIn(string login, string password)
+		{
+			HomePage homePage = Steps.Login(login, password);
+			return (homePage.GetLoggedUsername().Contains(login));
 		}
 
 		public static  void LogOut()
