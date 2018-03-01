@@ -5,7 +5,7 @@ namespace TAFProject.UIUtils.PageObjects
 {
 	public class AddProjectPage : BasePage
 	{
-		public override string BaseUrl { get; protected set; }= "http://icerow.com/projects/new";
+		//public override string BaseUrl { get; protected set; }= "http://icerow.com/projects/new";
 
 		BaseElement inputProjectName, inputProjectDescription, inputProjectIdentifier,
 			inputHomepage, checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
@@ -43,10 +43,10 @@ namespace TAFProject.UIUtils.PageObjects
 			else return false;
 		}
 
-		public  void GoToPage()
-		{
-			browser.GoToUrl(BaseUrl);
-		}
+		//public  void GoToPage()
+		//{
+		//	browser.GoToUrl(BaseUrl);
+		//}
 		
 	}
 }

@@ -5,7 +5,7 @@ namespace TAFProject.UIUtils.PageObjects
 {
 	public class HomePage : BasePage
 	{
-		public override string BaseUrl { get; protected set; }
+		//public override string BaseUrl { get; protected set; }
 
 		BaseElement logout;
 		BaseElement loginIdentifier;
@@ -15,16 +15,17 @@ namespace TAFProject.UIUtils.PageObjects
 		  //  BaseUrl = "http://icerow.com/";
          loginIdentifier = new BaseElement(By.Id("loggedas"));
 		}
-/*
-		try
-		{
-			driver.FindElement(by);
-			return true;
-		}
-	catch (NoSuchElementException)
-	{
-	return false;
-}*/
+		//*[@id='loggedas']/a
+		/*
+				try
+				{
+					driver.FindElement(by);
+					return true;
+				}
+			catch (NoSuchElementException)
+			{
+			return false;
+		}*/
 		public string GetLoggedUsername() => loginIdentifier.Text;
 		public bool IsLogIn()
 		{

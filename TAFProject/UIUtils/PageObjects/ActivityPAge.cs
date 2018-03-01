@@ -6,14 +6,14 @@ namespace TAFProject.UIUtils.PageObjects
 {
 	class ActivityPage : BasePage
 	{
-		public override string BaseUrl { get; protected set; }
+	//	public override string BaseUrl { get; protected set; }
 		string projectName;
 		BaseElement activityContent;
 
 		public ActivityPage(string projectName)
 		{
 			this.projectName = projectName;
-			BaseUrl = $"http:////icerow.com//projects//{this.projectName}//activity";
+	//		BaseUrl = $"http:////icerow.com//projects//{this.projectName}//activity";
 			activityContent = new BaseElement(By.Id("activity"));
 		}
 
