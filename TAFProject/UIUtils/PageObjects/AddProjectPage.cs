@@ -4,7 +4,6 @@ namespace TAFProject.UIUtils.PageObjects
 {
     public class AddProjectPage : BasePage
     {
-        public override string BaseUrl { get; protected set; } = "http://icerow.com/projects/new";
 
         BaseElement inputProjectName, inputProjectDescription, inputProjectIdentifier,
             inputHomepage, checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
@@ -12,8 +11,7 @@ namespace TAFProject.UIUtils.PageObjects
 
         public AddProjectPage()
         {
-            //	BaseUrl = "http://icerow.com/projects/new";
-            inputProjectName = new BaseElement("//input[@id='project_name']");
+			inputProjectName = new BaseElement("//input[@id='project_name']");
             inputProjectDescription = new BaseElement("//textarea[@id='project_description']");
             inputProjectIdentifier = new BaseElement("//input[@id='project_identifier']");
             inputHomepage = new BaseElement("//input[@id='project_homepage']");
@@ -40,11 +38,6 @@ namespace TAFProject.UIUtils.PageObjects
             if (notificationAboutCreation.Displayed)
                 return true;
             else return false;
-        }
-
-        public void GoToPage()
-        {
-            browser.GoToUrl(BaseUrl);
         }
 
     }

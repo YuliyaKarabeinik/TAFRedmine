@@ -6,14 +6,12 @@ namespace TAFProject.UIUtils.PageObjects
 {
     class ActivityPage : BasePage
     {
-        public override string BaseUrl { get; protected set; }
         string projectName;
         BaseElement activityContent;
 
         public ActivityPage(string projectName)
         {
             this.projectName = projectName;
-            BaseUrl = $"http:////icerow.com//projects//{this.projectName}//activity";
             activityContent = new BaseElement(By.Id("activity"));
         }
 
@@ -21,10 +19,6 @@ namespace TAFProject.UIUtils.PageObjects
         {
             return activityContent.FindElements(By.XPath("//dl//a")).Any(element => element.Text.Contains(issueName));
         }
-
-        //public override void GoToPage()
-        //{
-        //	browser.GoToUrl(BaseUrl);
-        //}
+		
     }
 }

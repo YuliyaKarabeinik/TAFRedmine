@@ -9,7 +9,9 @@ namespace TAFProject.Utils
         public static HomePage Login(string login, string password)
         {
             LoginPage loginPage = new LoginPage();
-            HomePage homepage = loginPage.Login(login, password);
+			loginPage.WriteUser(login);
+			loginPage.WritePassword(password);
+			HomePage homepage = loginPage.ClickSubmit();
             return homepage;
         }
 
@@ -37,9 +39,9 @@ namespace TAFProject.Utils
 
         public static AddProjectPage AddProject(string projectName, string projectIdentifier)
         {
-
-            RedmineNavigation.GoTo(Pages.NewProject);
-            var addProject = new AddProjectPage();
+			RedmineNavigation.GoTo<AddProjectPage>(Pages.NewProject);
+			//RedmineNavigation.GoToUrl("http://icerow.com/projects/new");
+			var addProject = new AddProjectPage();
             Thread.Sleep(4000);
             addProject.CreateNewProject(projectName, projectIdentifier);
             Thread.Sleep(4000);

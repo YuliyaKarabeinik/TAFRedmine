@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TAFProject.UIUtils.Driver;
 using TAFProject.UIUtils.PageObjects;
 
@@ -35,7 +34,7 @@ namespace TAFProject.Utils
 
         public static TPage GoTo<TPage>(Pages page, string projectIdentifier = "") where TPage : BasePage, new()
         {
-            browser.GoToUrl($"urls[page]/{projectIdentifier}");
+            browser.GoToUrl($"{urls[page]}/{projectIdentifier}");
             CurrentUrl = urls[page];
             return new TPage();
         }

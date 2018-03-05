@@ -5,26 +5,15 @@ namespace TAFProject.UIUtils.PageObjects
 {
     public class HomePage : BasePage
     {
-        public override string BaseUrl { get; protected set; }
-
-        BaseElement logout;
-        BaseElement loginIdentifier;
+		By loginIdentifierLocator = By.Id("loggedas");
+		By logoutLocator = By.XPath("//a[@class='logout']");
+		BaseElement logout, loginIdentifier;
 
         public HomePage()
         {
-            //  BaseUrl = "http://icerow.com/";
-            loginIdentifier = new BaseElement(By.Id("loggedas"));
+            loginIdentifier = new BaseElement(loginIdentifierLocator);
         }
-        /*
-                try
-                {
-                    driver.FindElement(by);
-                    return true;
-                }
-            catch (NoSuchElementException)
-            {
-            return false;
-        }*/
+       
         public string GetLoggedUsername() => loginIdentifier.Text;
         public bool IsLogIn()
         {
@@ -35,13 +24,8 @@ namespace TAFProject.UIUtils.PageObjects
 
         public void LogoutHomePage()
         {
-            logout = new BaseElement("//a[@class='logout']");
+            logout = new BaseElement(logoutLocator);
             logout.Click();
         }
-        //public override void GoToPage()
-        //{
-        //	browser.GoToUrl(BASE_URL);
-        //}
-
     }
 }

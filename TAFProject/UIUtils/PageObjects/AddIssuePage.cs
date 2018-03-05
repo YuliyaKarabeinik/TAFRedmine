@@ -18,7 +18,6 @@ namespace TAFProject.UIUtils.PageObjects
     }
     class AddIssuePage : BasePage
     {
-        public override string BaseUrl { get; protected set; }
         private readonly string projectName;
 
 
@@ -30,8 +29,7 @@ namespace TAFProject.UIUtils.PageObjects
         public AddIssuePage(string projectName)
         {
             this.projectName = projectName;
-            BaseUrl = $"http:////icerow.com//{this.projectName}//issues//new";
-
+            
             comboboxIssueType = new SelectElement(new BaseElement("//select[@id='issue_tracker_id']"));
             textboxSubject = new BaseElement("//input[@id='issue_subject']");
             textboxDescription = new BaseElement("//textarea[@id='issue_description']");
@@ -58,10 +56,5 @@ namespace TAFProject.UIUtils.PageObjects
                 comboboxPriority.SelectByText(priority.ToString());
             buttonCommitCreation.Click();
         }
-
-        //public override void GoToPage()
-        //{
-        //	browser.GoToUrl(BaseUrl);
-        //}
     }
 }

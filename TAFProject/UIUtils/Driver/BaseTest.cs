@@ -1,5 +1,4 @@
-﻿
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using TAFProject.Utils;
 
 namespace TAFProject.UIUtils.Driver
@@ -11,15 +10,16 @@ namespace TAFProject.UIUtils.Driver
         protected string password = "tat18pass";
 
         [OneTimeSetUp]
-        public virtual void InitTest()
+        public void InitTest()
         {
 
-            Logging.InitLogger(); // logger initialization
-            Logging.Log.Info($"Settings: " +
-                             $"\nCurrent browser: {Configuration.Browser}" +
-                             $"\nStart Url: {Configuration.StartUrl}" +
-                             $"\nTimeout: {Configuration.ElementTimeout}");
-            browser.WindowMaximise();
+			Logging.InitLogger(); // logger initialization
+			Logging.Log.Info($"Settings: " +
+							 $"\nCurrent browser: {Configuration.Browser}" +
+							 $"\nStart Url: {Configuration.StartUrl}" +
+							 $"\nTimeout: {Configuration.ElementTimeout}");
+			System.Threading.Thread.Sleep(5);
+			browser.WindowMaximise();
             browser.GoToUrl(Configuration.StartUrl);
 
             //	Steps.Login(login, password);
