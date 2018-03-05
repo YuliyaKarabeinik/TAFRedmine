@@ -6,7 +6,6 @@ namespace TAFProject.UIUtils.PageObjects
 {
     class IssueTableElement : BaseElement
     {
-        //tanya comment
         static readonly string issueTableXPathLocator = "//div[@id='content']//table";
         BaseElement sortByNumber, sortByTracker, sortByStatus, sortByPriority, sortBySubject,
             sortByAssignee, sortByUpdated;

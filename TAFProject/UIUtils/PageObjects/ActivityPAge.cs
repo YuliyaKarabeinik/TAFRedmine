@@ -6,19 +6,19 @@ namespace TAFProject.UIUtils.PageObjects
 {
     class ActivityPage : BasePage
     {
-        string projectName;
-        BaseElement activityContent;
+        By activityContentLocator = By.Id("activity");
+		BaseElement activityContent;
+		public string ProjectName { get; private set; }
 
-        public ActivityPage(string projectName)
+		public ActivityPage(string projectName)
         {
-            this.projectName = projectName;
-            activityContent = new BaseElement(By.Id("activity"));
+            ProjectName = projectName;
+            activityContent = SearchElementUtil.GetElement(activityContentLocator);
         }
 
         public bool IsIssueAdded(string issueName)
         {
-            return activityContent.FindElements(By.XPath("//dl//a")).Any(element => element.Text.Contains(issueName));
-        }
-		
+            return activityContent.FindElements(By.XPath("//dl//a")).Any(element => element.Text==issueName);
+        }		
     }
 }
