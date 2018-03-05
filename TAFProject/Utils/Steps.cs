@@ -15,18 +15,10 @@ namespace TAFProject.Utils
             return homepage;
         }
 
-        public static bool IsLoggedIn(string login, string password)
+        public static bool IsLoggedIn()
         {
-            try
-            {
-                HomePage homepage = new HomePage();
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-
-            }
+            HomePage homepage = new HomePage();
+			return homepage.IsLogIn();
         }
 
         public static void LogOut()

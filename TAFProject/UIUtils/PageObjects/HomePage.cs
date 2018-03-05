@@ -5,26 +5,27 @@ namespace TAFProject.UIUtils.PageObjects
 {
     public class HomePage : BasePage
     {
-		By loginIdentifierLocator = By.Id("loggedas");
+		By loginIdentifierLocator = By.XPath("//*[@id='loggedas']//*[@class='user active']");
 		By logoutLocator = By.XPath("//a[@class='logout']");
 		BaseElement logout, loginIdentifier;
 
         public HomePage()
         {
-            loginIdentifier = new BaseElement(loginIdentifierLocator);
+            loginIdentifier = SearchElementUtil.GetElement(loginIdentifierLocator);
         }
        
-        public string GetLoggedUsername() => loginIdentifier.Text;
+        public string GetCurrentUser() => loginIdentifier.Text;
+
         public bool IsLogIn()
         {
-            if (loginIdentifier.Displayed)
-                return true;
-            else return false;
+            if (loginIdentifier==null)
+                return false;
+            return true;
         }
 
         public void LogoutHomePage()
         {
-            logout = new BaseElement(logoutLocator);
+            logout = SearchElementUtil.GetElement(logoutLocator);
             logout.Click();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Threading;
 using TAFProject.UIUtils.Driver;
 using TAFProject.UIUtils.PageObjects;
 using TAFProject.Utils;
@@ -11,15 +12,16 @@ namespace Tests
         [SetUp]
         public void InitialTest()
         {
-            if (Steps.IsLoggedIn(login, password))
+			if (Steps.IsLoggedIn())
                 Steps.LogOut();
         }
 
         [Test]
         public void CorrectLoginTest()
         {
-            HomePage homepage = Steps.Login(login, password);
-            Assert.True(homepage.GetLoggedUsername().Contains(login));
+			HomePage homepage = Steps.Login(login, password);
+			Thread.Sleep(5);
+            Assert.True(homepage.GetCurrentUser()==login);
             //	Logging.Log.Info($"Test Login: {TestStatus}");
         }
     }
