@@ -8,17 +8,17 @@ namespace TAFProject.UIUtils.PageObjects
     {
         By activityContentLocator = By.Id("activity");
 		BaseElement activityContent;
-		public string ProjectName { get; private set; }
+		////public string ProjectName { get; private set; }
 
-		public ActivityPage(string projectName)
-        {
-            ProjectName = projectName;
-            activityContent = SearchElementUtil.GetElement(activityContentLocator);
-        }
+		////public ActivityPage(string projectName)
+  ////      {
+  ////          ProjectName = projectName;            
+  ////      }
 
         public bool IsIssueAdded(string issueName)
         {
-            return activityContent.FindElements(By.XPath("//dl//a")).Any(element => element.Text==issueName);
+			activityContent = SearchElementUtil.GetElement(activityContentLocator);
+			return activityContent.FindElements(By.XPath("//dl//a")).Any(element => element.Text==issueName);
         }		
     }
 }

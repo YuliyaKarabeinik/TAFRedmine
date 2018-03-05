@@ -22,10 +22,10 @@ namespace TAFProject.UIUtils.PageObjects
             inputHomepage, checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
         BaseElement notificationAboutCreation;
 
-        public AddProjectPage()
-        {  
-            //comboboxSubOf = SearchElementUtil.GetElement(locators["subprojectOf"]);
-        }
+        //public AddProjectPage()
+        //{  
+        //    //comboboxSubOf = SearchElementUtil.GetElement(locators["subprojectOf"]);
+        //}
 
 		public void WriteName(string projectName)
 		{

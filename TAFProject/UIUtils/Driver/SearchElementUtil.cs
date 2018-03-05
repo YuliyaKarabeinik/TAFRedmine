@@ -32,7 +32,7 @@ namespace TAFProject.UIUtils.Driver
 		}
 		//public void WaitElement(By locator)
 		//{
-
+		
 		//}
 	}
 }

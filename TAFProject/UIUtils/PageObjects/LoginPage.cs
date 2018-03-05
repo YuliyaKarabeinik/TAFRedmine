@@ -10,25 +10,28 @@ namespace TAFProject.UIUtils.PageObjects
 		By loginButtonLocator = By.XPath("//input[@type='submit']");
 		BaseElement textboxUser, textboxPassword, loginButton;
 
-		public LoginPage()
-        {
-			textboxUser = SearchElementUtil.GetElement(textboxUserLocator);
-			textboxPassword = SearchElementUtil.GetElement(textboxPasswordLocator);
-            loginButton = SearchElementUtil.GetElement(loginButtonLocator);
-        }
+		//public LoginPage()
+  //      {
+			
+			
+            
+  //      }
 
 		public void WriteUser(string login)
 		{
+			textboxUser = SearchElementUtil.GetElement(textboxUserLocator);
 			textboxUser.SendKeys(login);
 		}
 
 		public void WritePassword(string password)
 		{
+			textboxPassword = SearchElementUtil.GetElement(textboxPasswordLocator);
 			textboxPassword.SendKeys(password);
 		}
 
 		public HomePage ClickSubmit()
 		{
+			loginButton = SearchElementUtil.GetElement(loginButtonLocator);
 			loginButton.Click();
 			return new HomePage();
 		}
