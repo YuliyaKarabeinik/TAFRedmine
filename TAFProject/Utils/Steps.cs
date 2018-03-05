@@ -32,22 +32,25 @@ namespace TAFProject.Utils
         public static AddProjectPage AddProject(string projectName, string projectIdentifier)
         {
 			RedmineNavigation.GoTo<AddProjectPage>(Pages.NewProject);
-			var addProject = new AddProjectPage();
-			addProject.WriteName(projectName);
-			addProject.WriteIdentifier(projectIdentifier);
-			addProject.ClickCreate();
-            return addProject;
+			var newProject = new AddProjectPage();
+			newProject.WriteName(projectName);
+			newProject.WriteIdentifier(projectIdentifier);
+			newProject.ClickCreate();
+            return newProject;
         }
-		
-		//public static AddIssuePage AddIssue(string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
-		//	IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
-		//{
-		//	//RedmineNavigation.GoTo<AddIssuePage>(Pages.NewProject);
-		//	var addIssue = new AddIssuePage();
-		//	addProject.WriteName(projectName);
-		//	addProject.WriteIdentifier(projectIdentifier);
-		//	addProject.ClickCreate();
-		//	return addProject;
-		//}
+
+		public static AddIssuePage AddIssue(string projectName, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
+			IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
+		{
+			RedmineNavigation.GoTo<AddIssuePage>(Pages.NewProject, projectName);
+			var newIssue = new AddIssuePage();
+			newIssue.ChooseType(type);
+			newIssue.WriteSubject(issueSubject);
+			newIssue.WriteDescription(issueDescription);
+			newIssue.ChooseStatus(status);
+			newIssue.ChoosePriority(priority);
+			newIssue.ClickCreate();
+			return newIssue;
+		}
 	}
 }

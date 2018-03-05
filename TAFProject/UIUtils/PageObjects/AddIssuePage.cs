@@ -17,7 +17,7 @@ namespace TAFProject.UIUtils.PageObjects
     {
         Default, Lowest, Low, Medium, High, Highest
     }
-    class AddIssuePage : BasePage
+    public class AddIssuePage : BasePage
     {
 		Dictionary<string, By> locators = new Dictionary<string, By>()
 		{
@@ -30,15 +30,12 @@ namespace TAFProject.UIUtils.PageObjects
 		};		
 		SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
         BaseElement textboxSubject, textboxDescription, buttonCreate;
-		public string ProjectName { get; private set; }
-
+		
 		//static BaseElement newIssueNumber = new BaseElement("//*[@id=\"flash_notice\"]/a");
 		//private string createdIssueNumber = GetIssueNumber();
 
-		public AddIssuePage(string projectName)
+		public AddIssuePage()
         {
-            ProjectName = projectName;
-            
             comboboxIssueType = new SelectElement(SearchElementUtil.GetElement(locators["type"]));
             textboxSubject = SearchElementUtil.GetElement(locators["subject"]);
             textboxDescription = SearchElementUtil.GetElement(locators["description"]);

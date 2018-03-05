@@ -9,20 +9,28 @@ namespace Tests
     [TestFixture]
     class LoginTest : BaseTest
     {
-        [SetUp]
+		protected string login = "TAT18";
+		protected string password = "tat18pass";
+
+		[SetUp]
         public void InitialTest()
         {
 			if (Steps.IsLoggedIn())
                 Steps.LogOut();
         }
 
-        [Test]
+		[TearDown]
+		public void CloseTest()
+		{
+			browser.Close();
+		}
+
+		[Test]
         public void CorrectLoginTest()
         {
 			HomePage homepage = Steps.Login(login, password);
-			Thread.Sleep(5);
             Assert.True(homepage.GetCurrentUser()==login);
-            //	Logging.Log.Info($"Test Login: {TestStatus}");
+            //Logging.Log.Info($"Test Login: {TestStatus}");
         }
     }
 

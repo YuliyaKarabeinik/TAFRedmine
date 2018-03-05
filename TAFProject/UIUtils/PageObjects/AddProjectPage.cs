@@ -15,52 +15,83 @@ namespace TAFProject.UIUtils.PageObjects
 			{ "public", By.XPath("//input[@id='project_is_public']") },
 			{ "subprojectOf", By.XPath("//select[@id='project_parent_id']") },
 			{ "inheritMembers", By.XPath("//input[@id='project_inherit_members']") },
-			{ "buttonCreate", By.XPath("//input[@type='submit']") }
+			{ "buttonCreate", By.XPath("//input[@type='submit']") },
+			{ "notification", By.XPath("//div[@id='flash_notice']") }
 		};
         BaseElement inputProjectName, inputProjectDescription, inputProjectIdentifier,
             inputHomepage, checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
         BaseElement notificationAboutCreation;
 
         public AddProjectPage()
-        {
-			inputProjectName = SearchElementUtil.GetElement(locators["name"]);
-            inputProjectDescription = SearchElementUtil.GetElement(locators["description"]);
-            inputProjectIdentifier = SearchElementUtil.GetElement(locators["identifier"]);
-            inputHomepage = SearchElementUtil.GetElement(locators["homepage"]);
-            checkboxPublic = SearchElementUtil.GetElement(locators["public"]);
-            comboboxSubOf = SearchElementUtil.GetElement(locators["subprojectOf"]);
-            checkboxInheritMembers = SearchElementUtil.GetElement(locators["inheritMembers"]);
-            buttonCreate = SearchElementUtil.GetElement(locators["buttonCreate"]);
+        {  
+            //comboboxSubOf = SearchElementUtil.GetElement(locators["subprojectOf"]);
         }
 
 		public void WriteName(string projectName)
 		{
+			inputProjectName = SearchElementUtil.GetElement(locators["name"]);
 			inputProjectName.SendKeys(projectName);
 		}
 		public void WriteDescription(string projectDescription)
 		{
+			inputProjectDescription = SearchElementUtil.GetElement(locators["description"]);
 			inputProjectDescription.SendKeys(projectDescription);
 		}
 		public void WriteIdentifier(string projectIdentifier)
 		{
+			inputProjectIdentifier = SearchElementUtil.GetElement(locators["identifier"]);
 			inputProjectIdentifier.SendKeys(projectIdentifier);
 		}
 		public void WriteHomepage(string homepage)
 		{
+			inputHomepage = SearchElementUtil.GetElement(locators["homepage"]);
 			inputHomepage.SendKeys(homepage);
+		}
+		public void CheckPublic()
+		{
+			checkboxPublic = SearchElementUtil.GetElement(locators["public"]);
+			Check(checkboxPublic);
+		}
+		public void UncheckPublic()
+		{
+			checkboxPublic = SearchElementUtil.GetElement(locators["public"]);
+			Uncheck(checkboxPublic);
+		}
+		public void CheckInheritMembers()
+		{
+			checkboxInheritMembers = SearchElementUtil.GetElement(locators["inheritMembers"]);
+			Check(checkboxInheritMembers);
+		}
+		public void UncheckInheritMembers()
+		{
+			checkboxInheritMembers = SearchElementUtil.GetElement(locators["inheritMembers"]);
+			Uncheck(checkboxInheritMembers);
 		}
 		public AddProjectPage ClickCreate()
 		{
+			buttonCreate = SearchElementUtil.GetElement(locators["buttonCreate"]);
 			buttonCreate.Click();
 			return this;
 		}
 
 		public bool IsNotificationExist()
         {
-            notificationAboutCreation = new BaseElement("//div[@id='flash_notice']");
-            if (notificationAboutCreation.Displayed)
+            notificationAboutCreation = SearchElementUtil.GetElement(locators["notification"]);
+			if (notificationAboutCreation.Displayed)
                 return true;
             return false;
         }
-    }
+
+		private void Check (BaseElement element)
+		{
+			if (!element.Selected)
+				element.Click();
+		}
+
+		private void Uncheck(BaseElement element)
+		{
+			if (element.Selected)
+				element.Click();
+		}
+	}
 }

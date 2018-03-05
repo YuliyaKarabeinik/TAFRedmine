@@ -17,7 +17,13 @@ namespace Tests
             Steps.Login(login, password);
         }
 
-        private string projectName = RandomGenerator.GetRandomString(5);
+		[TearDown]
+		public void CloseTest()
+		{
+			browser.Close();
+		}
+
+		private string projectName = RandomGenerator.GetRandomString(5);
         private string projectIdentifier = RandomGenerator.GetRandomString(5);
         private string projectDescription = RandomGenerator.GetRandomString(5);
         private string homepage1 = RandomGenerator.GetRandomString(3);
