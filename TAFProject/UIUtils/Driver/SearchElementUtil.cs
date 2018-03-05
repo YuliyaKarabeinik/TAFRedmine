@@ -17,6 +17,19 @@ namespace TAFProject.UIUtils.Driver
 				return null;
 			}			
 		}
+
+		public static BaseElement GetElement(string xPathLocator)
+		{
+			try
+			{
+				BaseElement element = new BaseElement(xPathLocator);
+				return element;
+			}
+			catch (NoSuchElementException)
+			{
+				return null;
+			}
+		}
 		//public void WaitElement(By locator)
 		//{
 

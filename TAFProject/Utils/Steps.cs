@@ -32,12 +32,10 @@ namespace TAFProject.Utils
         public static AddProjectPage AddProject(string projectName, string projectIdentifier)
         {
 			RedmineNavigation.GoTo<AddProjectPage>(Pages.NewProject);
-			//RedmineNavigation.GoToUrl("http://icerow.com/projects/new");
 			var addProject = new AddProjectPage();
-            Thread.Sleep(4000);
-            addProject.CreateNewProject(projectName, projectIdentifier);
-            Thread.Sleep(4000);
-            //AddProjectPage addProjectPage = new AddProjectPage();
+			addProject.WriteName(projectName);
+			addProject.WriteIdentifier(projectIdentifier);
+			addProject.ClickCreate();
             return addProject;
         }
     }
