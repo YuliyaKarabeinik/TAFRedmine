@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
@@ -18,43 +19,64 @@ namespace TAFProject.UIUtils.PageObjects
     }
     class AddIssuePage : BasePage
     {
-        private readonly string projectName;
+		Dictionary<string, By> locators = new Dictionary<string, By>()
+		{
+			{ "type", By.XPath("//select[@id='issue_tracker_id']") },
+			{ "subject", By.XPath("//input[@id='issue_subject']") },
+			{ "description", By.XPath("//textarea[@id='issue_description']") },
+			{ "status", By.XPath("//input[@id='project_homepage']") },
+			{ "priority", By.XPath("//input[@id='project_is_public']") },
+			{ "buttonCreate", By.XPath("//select[@id='project_parent_id']") }
+		};		
+		SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
+        BaseElement textboxSubject, textboxDescription, buttonCreate;
+		public string ProjectName { get; private set; }
 
+		//static BaseElement newIssueNumber = new BaseElement("//*[@id=\"flash_notice\"]/a");
+		//private string createdIssueNumber = GetIssueNumber();
 
-        private SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
-        BaseElement textboxSubject, textboxDescription, buttonCommitCreation;
-        //static BaseElement newIssueNumber = new BaseElement("//*[@id=\"flash_notice\"]/a");
-        //private string createdIssueNumber = GetIssueNumber();
-
-        public AddIssuePage(string projectName)
+		public AddIssuePage(string projectName)
         {
-            this.projectName = projectName;
+            ProjectName = projectName;
             
-            comboboxIssueType = new SelectElement(new BaseElement("//select[@id='issue_tracker_id']"));
-            textboxSubject = new BaseElement("//input[@id='issue_subject']");
-            textboxDescription = new BaseElement("//textarea[@id='issue_description']");
-            comboboxStatus = new SelectElement(new BaseElement("//select[@id='issue_status_id']"));
-            comboboxPriority = new SelectElement(new BaseElement("//select[@id='issue_priority_id']"));
-            buttonCommitCreation = new BaseElement("//input[@type='submit'][@name = 'commit']");
+            comboboxIssueType = new SelectElement(SearchElementUtil.GetElement(locators["type"]));
+            textboxSubject = SearchElementUtil.GetElement(locators["subject"]);
+            textboxDescription = SearchElementUtil.GetElement(locators["description"]);
+            comboboxStatus = new SelectElement(SearchElementUtil.GetElement(locators["status"]));
+            comboboxPriority = new SelectElement(SearchElementUtil.GetElement(locators["priority"]));
+			buttonCreate = SearchElementUtil.GetElement(locators["buttonCreate"]);
         }
 
-        //public static string GetIssueNumber()
-        //{
-        //	return newIssueNumber.Text;
-        //}
-
-        public void CreateNewIssue(string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
-            IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
-        {
-            if (type != IssueType.Default)
-                comboboxIssueType.SelectByText(type.ToString().Replace(" ", ""));
-            textboxSubject.SendKeys(issueSubject);
-            textboxDescription.SendKeys(issueDescription);
-            if (status != IssueStatus.Default)
-                comboboxStatus.SelectByText(status.ToString().Replace(" ", ""));
-            if (priority != IssuePriority.Default)
-                comboboxPriority.SelectByText(priority.ToString());
-            buttonCommitCreation.Click();
-        }
+		//public static string GetIssueNumber()
+		//{
+		//	return newIssueNumber.Text;
+		//}
+		public void ChooseType (IssueType type)
+		{
+			if (type != IssueType.Default)
+				comboboxIssueType.SelectByText(type.ToString().Replace(" ", ""));
+		}
+		public void WriteSubject(string issueSubject)
+		{
+			textboxSubject.SendKeys(issueSubject);
+		}
+		public void WriteDescription(string issueDescription)
+		{
+			textboxDescription.SendKeys(issueDescription);
+		}
+		public void ChooseStatus(IssueStatus status)
+		{
+			if (status != IssueStatus.Default)
+				comboboxStatus.SelectByText(status.ToString().Replace(" ", ""));
+		}
+		public void ChoosePriority(IssuePriority priority)
+		{
+			if (priority != IssuePriority.Default)
+				comboboxPriority.SelectByText(priority.ToString());
+		}
+		public void ClickCreate()
+		{
+			buttonCreate.Click();
+		}				
     }
 }

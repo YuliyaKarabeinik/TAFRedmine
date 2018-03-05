@@ -38,5 +38,16 @@ namespace TAFProject.Utils
 			addProject.ClickCreate();
             return addProject;
         }
-    }
+		
+		//public static AddIssuePage AddIssue(string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
+		//	IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
+		//{
+		//	//RedmineNavigation.GoTo<AddIssuePage>(Pages.NewProject);
+		//	var addIssue = new AddIssuePage();
+		//	addProject.WriteName(projectName);
+		//	addProject.WriteIdentifier(projectIdentifier);
+		//	addProject.ClickCreate();
+		//	return addProject;
+		//}
+	}
 }
