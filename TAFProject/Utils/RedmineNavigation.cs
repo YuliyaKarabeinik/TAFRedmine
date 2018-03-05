@@ -26,11 +26,19 @@ namespace TAFProject.Utils
             { Pages.Issues, $"http:////icerow.com//projects//{CurrentProjectIdentifier}//issues"}
         };
         
-        public static void GoToUrl(string url)
+        public static BasePage GoToUrl(string url)
         {
             browser.GoToUrl(url);
-            CurrentUrl = url;
-        }
+			CurrentUrl = url;
+			if (url == urls[Pages.Login])
+				return new LoginPage();
+			if (url == urls[Pages.Home])
+				return new HomePage();
+			if (url == urls[Pages.NewProject])
+				return new AddProjectPage();
+			return new HomePage();
+
+		}
 
         public static TPage GoTo<TPage>(Pages page, string projectIdentifier = "") where TPage : BasePage, new()
         {

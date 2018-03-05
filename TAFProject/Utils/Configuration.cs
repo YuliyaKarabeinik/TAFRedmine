@@ -14,7 +14,7 @@ namespace TAFProject.Utils
 		private static readonly string keyBrowser = "browser";
 		private static readonly string keyStartUrl = "startUrl";
 
-		private static readonly int defaultTimeout = 5;
+		private static readonly int defaultTimeout = 10;
 		private static readonly BrowserType defaultBrowser = BrowserType.Chrome;
 		private static readonly string defaultStartUrl = "http://icerow.com/";
 

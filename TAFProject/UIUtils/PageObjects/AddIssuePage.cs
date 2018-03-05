@@ -34,45 +34,41 @@ namespace TAFProject.UIUtils.PageObjects
 		//static BaseElement newIssueNumber = new BaseElement("//*[@id=\"flash_notice\"]/a");
 		//private string createdIssueNumber = GetIssueNumber();
 
-		public AddIssuePage()
-        {
-            comboboxIssueType = new SelectElement(SearchElementUtil.GetElement(locators["type"]));
-            textboxSubject = SearchElementUtil.GetElement(locators["subject"]);
-            textboxDescription = SearchElementUtil.GetElement(locators["description"]);
-            comboboxStatus = new SelectElement(SearchElementUtil.GetElement(locators["status"]));
-            comboboxPriority = new SelectElement(SearchElementUtil.GetElement(locators["priority"]));
-			buttonCreate = SearchElementUtil.GetElement(locators["buttonCreate"]);
-        }
-
 		//public static string GetIssueNumber()
 		//{
 		//	return newIssueNumber.Text;
 		//}
 		public void ChooseType (IssueType type)
 		{
+			comboboxIssueType = new SelectElement(SearchElementUtil.GetElement(locators["type"]));
 			if (type != IssueType.Default)
 				comboboxIssueType.SelectByText(type.ToString().Replace(" ", ""));
 		}
 		public void WriteSubject(string issueSubject)
 		{
+			textboxSubject = SearchElementUtil.GetElement(locators["subject"]);
 			textboxSubject.SendKeys(issueSubject);
 		}
 		public void WriteDescription(string issueDescription)
 		{
+			textboxDescription = SearchElementUtil.GetElement(locators["description"]);
 			textboxDescription.SendKeys(issueDescription);
 		}
 		public void ChooseStatus(IssueStatus status)
 		{
+			comboboxStatus = new SelectElement(SearchElementUtil.GetElement(locators["status"]));
 			if (status != IssueStatus.Default)
 				comboboxStatus.SelectByText(status.ToString().Replace(" ", ""));
 		}
 		public void ChoosePriority(IssuePriority priority)
 		{
+			comboboxPriority = new SelectElement(SearchElementUtil.GetElement(locators["priority"]));
 			if (priority != IssuePriority.Default)
 				comboboxPriority.SelectByText(priority.ToString());
 		}
 		public void ClickCreate()
 		{
+			buttonCreate = SearchElementUtil.GetElement(locators["buttonCreate"]);
 			buttonCreate.Click();
 		}				
     }

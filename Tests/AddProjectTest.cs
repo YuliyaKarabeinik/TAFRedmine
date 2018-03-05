@@ -21,6 +21,7 @@ namespace Tests
 		public void CloseTest()
 		{
 			browser.Close();
+			//Logging.Log.Info($"Test Login: {TestStatus}");
 		}
 
 		private string projectName = RandomGenerator.GetRandomString(5);
@@ -31,7 +32,7 @@ namespace Tests
         [Test]
         public void AddProject()
         {
-            AddProjectPage addProjectPage = Steps.AddProject(projectName, projectIdentifier);
+			AddProjectPage addProjectPage = Steps.AddProject(projectName, projectIdentifier);
             Assert.IsTrue(addProjectPage.IsNotificationExist());
         }
     }

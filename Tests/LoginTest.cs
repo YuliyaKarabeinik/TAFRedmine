@@ -23,6 +23,7 @@ namespace Tests
 		public void CloseTest()
 		{
 			browser.Close();
+			//Logging.Log.Info($"Test Login: {TestStatus}");
 		}
 
 		[Test]
@@ -30,7 +31,6 @@ namespace Tests
         {
 			HomePage homepage = Steps.Login(login, password);
             Assert.True(homepage.GetCurrentUser()==login);
-            //Logging.Log.Info($"Test Login: {TestStatus}");
         }
     }
 
