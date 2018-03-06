@@ -38,7 +38,7 @@ namespace TAFProject.Utils
         public static AddProjectPage AddProject(string projectName, string projectIdentifier)
         {
 
-            RedmineNavigation.GoTo(Pages.NewProject);
+            RedmineNavigation.GoTo<AddProjectPage>(Pages.NewProject);
             var addProject = new AddProjectPage();
             Thread.Sleep(4000);
             addProject.CreateNewProject(projectName, projectIdentifier);
