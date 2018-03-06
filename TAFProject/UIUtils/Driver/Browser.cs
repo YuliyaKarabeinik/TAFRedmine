@@ -1,5 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using TAFProject.Utils;
 
 namespace TAFProject.UIUtils.Driver
@@ -7,22 +6,15 @@ namespace TAFProject.UIUtils.Driver
     public class Browser
     {
         static Browser _instance;
-        BrowserFactory.BrowserType browserTypeFromConfig;
-        private int impWait;
-        public int ImpWait
-        {
-            get
-            {
-                return impWait;
-            }
-        }
+        BrowserType browserTypeFromConfig;
+        public int ImpWait {get; }
         public IWebDriver Driver { get; private set; }
 
         private Browser()
         {
-            int.TryParse(Configuration.ElementTimeout, out impWait);
-            Enum.TryParse(Configuration.Browser, out browserTypeFromConfig);
-            Driver = BrowserFactory.GetDriver(browserTypeFromConfig, impWait);
+            ImpWait = Configuration.ElementTimeout;
+			browserTypeFromConfig = Configuration.Browser;
+			Driver = BrowserFactory.GetDriver(browserTypeFromConfig, ImpWait);
         }
 
         public static Browser Instance => _instance ?? (_instance = new Browser());
@@ -42,7 +34,12 @@ namespace TAFProject.UIUtils.Driver
             return Driver.FindElement(locator);
         }
 
-        public void Quit()
+		public void Close()
+		{
+			Driver.Close();
+		}
+
+		public void Quit()
         {
             Driver.Quit();
             _instance = null;

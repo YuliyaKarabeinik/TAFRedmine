@@ -3,27 +3,30 @@ using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
-    public class LoginPage : BasePage
-    {
-        public override string BaseUrl { get; protected set; }
-        BaseElement loginForm, passwordForm, loginButton;
+	public class LoginPage : BasePage
+	{
+	    readonly By textboxUserLocator = By.Id("username");
+	    readonly By textboxPasswordLocator = By.Id("password");
+	    readonly By loginButtonLocator = By.XPath("//input[@type='submit']");
+		BaseElement textboxUser, textboxPassword, loginButton;
 
-        public LoginPage()
-        {
-            BaseUrl = "http://icerow.com/";
-            loginForm = new BaseElement(By.Id("username"));
-            passwordForm = new BaseElement(By.Id("password"));
-            loginButton = new BaseElement("//input[@type='submit']");
-        }
+		public void WriteUser(string login)
+		{
+			textboxUser = SearchElementUtil.GetElement(textboxUserLocator);
+			textboxUser.SendKeys(login);
+		}
 
+		public void WritePassword(string password)
+		{
+			textboxPassword = SearchElementUtil.GetElement(textboxPasswordLocator);
+			textboxPassword.SendKeys(password);
+		}
 
-
-        public HomePage Login(string login, string password)
-        {
-            loginForm.SendKeys(login);
-            passwordForm.SendKeys(password);
-            loginButton.Click();
-            return new HomePage();
-        }
-    }
+		public HomePage ClickSubmit()
+		{
+			loginButton = SearchElementUtil.GetElement(loginButtonLocator);
+			loginButton.Click();
+			return new HomePage();
+		}
+	}
 }
