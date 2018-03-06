@@ -4,18 +4,31 @@ using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
+	public enum Columns
+	{
+		Number, Tracker, Status, Priority, Subject, Asignee, Updated
+	}
 	class IssueTableElement : BaseElement
 	{
+		//IssuePage.Table[1]->issue
+		//Table.Sort {return new issueTable;}
+
 		static readonly string issueTableXPathLocator = "//div[@id='content']//table";
-		BaseElement sortByNumber, sortByTracker, sortByStatus, sortByPriority, sortBySubject,
-			sortByAssignee, sortByUpdated;
+		BaseElement columnSortBy;
 
+		public IWebElement this[int issueNumber] =>
+			FindElement(By.XPath($"//tbody//tr[@id='issue-{issueNumber}']"));
+		
 		public IssueTableElement() : base(issueTableXPathLocator) { }
-
-		public void SortBySubject()
+		
+		public IssueTableElement SortBy(Columns column)
 		{
-			sortBySubject = new BaseElement(FindElement(By.XPath("//th[@title='Sort by \"Subject\"']")));
-			sortBySubject.Click();
+			if (column==Columns.Number)
+				columnSortBy = new BaseElement(FindElement(By.XPath("//th[@title='Sort by \"#\"']")));
+			else
+				columnSortBy = new BaseElement(FindElement(By.XPath($"//th[@title='Sort by \"{column.ToString()}\"']")));
+			columnSortBy.Click();
+			return new IssueTableElement();
 		}
 
 		public List<string> GetIssuesSubjectList()
