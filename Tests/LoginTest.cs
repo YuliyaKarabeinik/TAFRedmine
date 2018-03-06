@@ -1,7 +1,5 @@
 ﻿using NUnit.Framework;
-using System.Threading;
 using TAFProject.UIUtils.Driver;
-using TAFProject.UIUtils.PageObjects;
 using TAFProject.Utils;
 
 namespace Tests
@@ -9,13 +7,13 @@ namespace Tests
     [TestFixture]
     class LoginTest : BaseTest
     {
-		protected string login = "TAT18";
-		protected string password = "tat18pass";
+		string user = "TAT18";
+		string password = "tat18pass";
 
 		[SetUp]
         public void InitialTest()
         {
-			if (Steps.IsLoggedIn())
+			if (Steps.IsLogIn())
                 Steps.LogOut();
         }
 
@@ -29,9 +27,8 @@ namespace Tests
 		[Test]
         public void CorrectLoginTest()
         {
-			HomePage homepage = Steps.Login(login, password);
-            Assert.True(homepage.GetCurrentUser()==login);
+			Steps.Login(user, password);
+            Assert.True(Steps.IsLogIn(user));
         }
     }
-
 }

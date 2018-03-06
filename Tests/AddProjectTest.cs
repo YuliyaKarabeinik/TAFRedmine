@@ -8,8 +8,8 @@ namespace Tests
     [TestFixture]
     class AddProjectTest : BaseTest
     {
-        private string login = "TAT18";
-        private string password = "tat18pass";
+        string login = "TAT18";
+        string password = "tat18pass";
 
         [SetUp]
         public void LogIn()
@@ -23,17 +23,27 @@ namespace Tests
 			browser.Close();
 			//Logging.Log.Info($"Test Login: {TestStatus}");
 		}
+		static string name = RandomGenerator.GetRandomString(5);
+		static string identifier = RandomGenerator.GetRandomString(5);
+		static string incorrectIdentifier = "";
+		
+		//static object[] incorrectProjectFields = {
+		//	new object [] {RandomGenerator.GetRandomString(5), ""}
+		//};
 
-		private string projectName = RandomGenerator.GetRandomString(5);
-        private string projectIdentifier = RandomGenerator.GetRandomString(5);
-        private string projectDescription = RandomGenerator.GetRandomString(5);
-        private string homepage1 = RandomGenerator.GetRandomString(3);
-
-        [Test]
-        public void AddProject()
+		[Test]
+        public void AddProjectPositiveTest()
         {
-			AddProjectPage addProjectPage = Steps.AddProject(projectName, projectIdentifier);
-            Assert.IsTrue(addProjectPage.IsNotificationExist());
+			Steps.AddProject(name, identifier);
+            Assert.IsTrue(Steps.IsProjectCreated());
         }
-    }
+
+		//[Test, TestCaseSource("incorrectProjectFields")]
+		[Test]
+		public void AddProjectNegativeTest()
+		{
+			Steps.AddProject(name, incorrectIdentifier);
+			Assert.IsTrue(Steps.IsProjectCreationFailed());
+		}
+	}
 }

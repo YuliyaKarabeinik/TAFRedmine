@@ -16,7 +16,8 @@ namespace TAFProject.UIUtils.PageObjects
 			{ "subprojectOf", By.XPath("//select[@id='project_parent_id']") },
 			{ "inheritMembers", By.XPath("//input[@id='project_inherit_members']") },
 			{ "buttonCreate", By.XPath("//input[@type='submit']") },
-			{ "notification", By.XPath("//div[@id='flash_notice']") }
+			{ "positiveNotification", By.XPath("//*[@id='flash_notice']") },
+			{ "negativeNotification", By.XPath("//*[@id='errorExplanation']") }
 		};
         BaseElement inputProjectName, inputProjectDescription, inputProjectIdentifier,
             inputHomepage, checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
@@ -35,6 +36,7 @@ namespace TAFProject.UIUtils.PageObjects
 		public void WriteIdentifier(string projectIdentifier)
 		{
 			inputProjectIdentifier = SearchElementUtil.GetElement(locators["identifier"]);
+			inputProjectIdentifier.Clear();
 			inputProjectIdentifier.SendKeys(projectIdentifier);
 		}
 		public void WriteHomepage(string homepage)
@@ -69,13 +71,21 @@ namespace TAFProject.UIUtils.PageObjects
 			return this;
 		}
 
-		public bool IsNotificationExist()
+		public bool IsPositiveNotificationAppear()
         {
-            notificationAboutCreation = SearchElementUtil.GetElement(locators["notification"]);
+            notificationAboutCreation = SearchElementUtil.GetElement(locators["positiveNotification"]);
 			if (notificationAboutCreation.Displayed)
                 return true;
             return false;
         }
+
+		public bool IsNegativeNotificationAppear()
+		{
+			notificationAboutCreation = SearchElementUtil.GetElement(locators["negativeNotification"]);
+			if (notificationAboutCreation.Displayed)
+				return true;
+			return false;
+		}
 
 		private void Check (BaseElement element)
 		{

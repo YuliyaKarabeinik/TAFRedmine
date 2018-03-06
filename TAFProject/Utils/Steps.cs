@@ -1,48 +1,57 @@
-﻿using System.Threading;
-using OpenQA.Selenium;
-using TAFProject.UIUtils.PageObjects;
+﻿using TAFProject.UIUtils.PageObjects;
 
 namespace TAFProject.Utils
 {
     public static class Steps
     {
-        public static HomePage Login(string login, string password)
+        public static void Login(string login, string password)
         {
             LoginPage loginPage = new LoginPage();
 			loginPage.WriteUser(login);
 			loginPage.WritePassword(password);
-			HomePage homepage = loginPage.ClickSubmit();
-            return homepage;
-        }
+			loginPage.ClickSubmit();
+			RedmineNavigation.GoTo<HomePage>(Pages.Home);
+		}
 
-        public static bool IsLoggedIn()
+        public static bool IsLogIn(string user = "")
         {
             HomePage homepage = new HomePage();
-			return homepage.IsLogIn();
+			if (user == string.Empty)
+				return homepage.IsLogIn();
+			return homepage.GetCurrentUser() == user;
         }
 
         public static void LogOut()
         {
             HomePage homepage = new HomePage();
             homepage.LogoutHomePage();
-            //	Assert.True(homepage.GetLoggedUsername().Contains(login));
-            //	return (homepage.GetLoggedUsername().Equals(login));
         }
 
-        public static AddProjectPage AddProject(string projectName, string projectIdentifier)
+        public static void AddProject(string projectName, string projectIdentifier)
         {
 			RedmineNavigation.GoTo<AddProjectPage>(Pages.NewProject);
 			var newProject = new AddProjectPage();
 			newProject.WriteName(projectName);
 			newProject.WriteIdentifier(projectIdentifier);
 			newProject.ClickCreate();
-            return newProject;
         }
 
-		public static AddIssuePage AddIssue(string projectName, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
+		public static bool IsProjectCreated()
+		{
+			AddProjectPage page = new AddProjectPage();
+			return page.IsPositiveNotificationAppear();
+		}
+
+		public static bool IsProjectCreationFailed()
+		{
+			AddProjectPage page = new AddProjectPage();
+			return page.IsNegativeNotificationAppear();
+		}
+
+		public static void AddIssue(string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
 			IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
 		{
-			RedmineNavigation.GoTo<AddIssuePage>(Pages.NewProject, projectName);
+			RedmineNavigation.GoTo<AddIssuePage>(Pages.NewIssue, projectIdentifier);
 			var newIssue = new AddIssuePage();
 			newIssue.ChooseType(type);
 			newIssue.WriteSubject(issueSubject);
@@ -50,7 +59,6 @@ namespace TAFProject.Utils
 			newIssue.ChooseStatus(status);
 			newIssue.ChoosePriority(priority);
 			newIssue.ClickCreate();
-			return newIssue;
 		}
 	}
 }
