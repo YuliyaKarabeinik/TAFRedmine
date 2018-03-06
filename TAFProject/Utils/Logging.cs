@@ -7,7 +7,7 @@ namespace TAFProject.Utils
 	{
 		private static ILog log = LogManager.GetLogger("LOGGER");
 
-        public static ILog Log => log;
+		public static ILog Log => log;
 
 		public static void InitLogger()
 		{

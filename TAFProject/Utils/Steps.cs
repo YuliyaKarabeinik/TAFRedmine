@@ -1,65 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using TAFProject.UIUtils.PageObjects;
+﻿using TAFProject.UIUtils.PageObjects;
 
 namespace TAFProject.Utils
 {
 	public static class Steps
 	{
-		static	Navigation navigation = new Navigation();
-
-		public static HomePage Login(string login, string password)
+		public static void Login(string login, string password)
 		{
 			LoginPage loginPage = new LoginPage();
-			loginPage.InsertLogin(login);
-			loginPage.InsertPassword(password);
-			HomePage homepage = loginPage.ClickLoginButton();
-			return homepage;
+			loginPage.WriteUser(login);
+			loginPage.WritePassword(password);
+			loginPage.ClickSubmit();
+			RedmineNavigation.GoTo<HomePage>(Pages.Home);
 		}
 
-	/*	public static bool IsLoggedIn(string login, string password)
+		public static bool IsLogIn(string user = "")
 		{
-			try
-			{
-				HomePage homepage = new HomePage();
-				return true;
-			}
-			catch (NoSuchElementException)
-			{
-				return false;
-
-			}
-		}*/
-
-		public static bool IsLoggedIn(string login, string password)
-		{
-			HomePage homePage = Steps.Login(login, password);
-			return (homePage.GetLoggedUsername().Contains(login));
+			HomePage homepage = new HomePage();
+			if (user == string.Empty)
+				return homepage.IsLogIn();
+			return homepage.GetCurrentUser() == user;
 		}
 
-		public static  void LogOut()
+		public static void LogOut()
 		{
 			HomePage homepage = new HomePage();
 			homepage.LogoutHomePage();
-			//	Assert.True(homepage.GetLoggedUsername().Contains(login));
-		//	return (homepage.GetLoggedUsername().Equals(login));
 		}
-	
-		public static AddProjectPage AddProject(string projectName, string projectIdentifier)
+
+		public static void AddProject(string projectName, string projectIdentifier)
 		{
-			
-			navigation.GoToUrl(navigation.AddProjectUrl);
-			var addProject = new AddProjectPage();
-			Thread.Sleep(4000);
-			addProject.CreateNewProject(projectName, projectIdentifier);
-			Thread.Sleep(4000);
-			//AddProjectPage addProjectPage = new AddProjectPage();
-			return addProject;
+			RedmineNavigation.GoTo<AddProjectPage>(Pages.NewProject);
+			var newProject = new AddProjectPage();
+			newProject.WriteName(projectName);
+			newProject.WriteIdentifier(projectIdentifier);
+			newProject.ClickCreate();
+		}
+
+		public static bool IsProjectCreated()
+		{
+			AddProjectPage page = new AddProjectPage();
+			return page.IsPositiveNotificationAppear();
+		}
+        
+		public static bool IsProjectCreationFailed()
+		{
+			AddProjectPage page = new AddProjectPage();
+			return page.IsNegativeNotificationAppear();
+		}
+
+		public static void AddIssue(string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
+			IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
+		{
+			RedmineNavigation.GoTo<AddIssuePage>(Pages.NewIssue, projectIdentifier);
+			var newIssue = new AddIssuePage();
+			newIssue.ChooseType(type);
+			newIssue.WriteSubject(issueSubject);
+			newIssue.WriteDescription(issueDescription);
+			newIssue.ChooseStatus(status);
+			newIssue.ChoosePriority(priority);
+			newIssue.ClickCreate();
 		}
 	}
 }

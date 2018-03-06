@@ -5,28 +5,26 @@ namespace TAFProject.UIUtils.PageObjects
 {
 	public class LoginPage : BasePage
 	{
-		//public override string BaseUrl { get; protected set; }
-		BaseElement loginForm, passwordForm, loginButton;
+	    readonly By textboxUserLocator = By.Id("username");
+	    readonly By textboxPasswordLocator = By.Id("password");
+	    readonly By loginButtonLocator = By.XPath("//input[@type='submit']");
+		BaseElement textboxUser, textboxPassword, loginButton;
 
-	    public LoginPage()
-	    {
-			//BaseUrl = "http://icerow.com/";
-            loginForm = new BaseElement(By.Id("username"));
-	        passwordForm = new BaseElement(By.Id("password"));
-	        loginButton = new BaseElement("//input[@type='submit']");
-        }
+		public void WriteUser(string login) //setUser  //return this
+		{
+			textboxUser = SearchElementUtil.GetElement(textboxUserLocator);
+			textboxUser.SendKeys(login);
+		}
 
-		public void InsertLogin(string login)
+		public void WritePassword(string password)
 		{
-			loginForm.SendKeys(login);
+			textboxPassword = SearchElementUtil.GetElement(textboxPasswordLocator);
+			textboxPassword.SendKeys(password);
 		}
-		public void InsertPassword(string password)
+
+		public HomePage ClickSubmit()
 		{
-			passwordForm.SendKeys(password);
-		}
-		
-		public HomePage ClickLoginButton()
-		{
+			loginButton = SearchElementUtil.GetElement(loginButtonLocator);
 			loginButton.Click();
 			return new HomePage();
 		}

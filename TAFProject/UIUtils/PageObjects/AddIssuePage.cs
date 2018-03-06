@@ -1,10 +1,11 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
-	public enum IssueType
+	public enum IssueType  //Models
 	{
 		Default, Task, ChangeRequest
 	}
@@ -16,52 +17,59 @@ namespace TAFProject.UIUtils.PageObjects
 	{
 		Default, Lowest, Low, Medium, High, Highest
 	}
-	class AddIssuePage : BasePage
+	public class AddIssuePage : BasePage
 	{
-	//	public override string BaseUrl { get; protected set; }
-		private readonly string projectName;
+	    readonly Dictionary<string, By> locators = new Dictionary<string, By>()
+		{
+			{ "type", By.XPath("//select[@id='issue_tracker_id']") },
+			{ "subject", By.XPath("//input[@id='issue_subject']") },
+			{ "description", By.XPath("//textarea[@id='issue_description']") },
+			{ "status", By.XPath("//input[@id='project_homepage']") },
+			{ "priority", By.XPath("//input[@id='project_is_public']") },
+			{ "buttonCreate", By.XPath("//select[@id='project_parent_id']") }
+		};
+		SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
+		BaseElement textboxSubject, textboxDescription, buttonCreate;
 
-
-		private SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
-		BaseElement textboxSubject, textboxDescription, buttonCommitCreation;
 		//static BaseElement newIssueNumber = new BaseElement("//*[@id=\"flash_notice\"]/a");
 		//private string createdIssueNumber = GetIssueNumber();
-
-		public AddIssuePage(string projectName)
-		{
-			this.projectName = projectName;
-		//	BaseUrl = $"http:////icerow.com//{this.projectName}//issues//new";
-
-			comboboxIssueType = new SelectElement(new BaseElement("//select[@id='issue_tracker_id']"));
-			textboxSubject = new BaseElement("//input[@id='issue_subject']");
-			textboxDescription = new BaseElement("//textarea[@id='issue_description']");
-			comboboxStatus = new SelectElement(new BaseElement("//select[@id='issue_status_id']"));
-			comboboxPriority = new SelectElement(new BaseElement("//select[@id='issue_priority_id']"));
-			buttonCommitCreation = new BaseElement("//input[@type='submit'][@name = 'commit']");
-		}
 
 		//public static string GetIssueNumber()
 		//{
 		//	return newIssueNumber.Text;
 		//}
-
-		public void CreateNewIssue(string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
-			IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
+		public void ChooseType(IssueType type) //SelectType
 		{
+			comboboxIssueType = new SelectElement(SearchElementUtil.GetElement(locators["type"]));
 			if (type != IssueType.Default)
 				comboboxIssueType.SelectByText(type.ToString().Replace(" ", ""));
+		}
+		public void WriteSubject(string issueSubject)
+		{
+			textboxSubject = SearchElementUtil.GetElement(locators["subject"]);
 			textboxSubject.SendKeys(issueSubject);
+		}
+		public void WriteDescription(string issueDescription)
+		{
+			textboxDescription = SearchElementUtil.GetElement(locators["description"]);
 			textboxDescription.SendKeys(issueDescription);
+		}
+		public void ChooseStatus(IssueStatus status)
+		{
+			comboboxStatus = new SelectElement(SearchElementUtil.GetElement(locators["status"]));
 			if (status != IssueStatus.Default)
 				comboboxStatus.SelectByText(status.ToString().Replace(" ", ""));
+		}
+		public void ChoosePriority(IssuePriority priority)
+		{
+			comboboxPriority = new SelectElement(SearchElementUtil.GetElement(locators["priority"]));
 			if (priority != IssuePriority.Default)
 				comboboxPriority.SelectByText(priority.ToString());
-			buttonCommitCreation.Click();
 		}
-
-		//public override void GoToPage()
-		//{
-		//	browser.GoToUrl(BaseUrl);
-		//}
+		public void ClickCreate()
+		{
+			buttonCreate = SearchElementUtil.GetElement(locators["buttonCreate"]);
+			buttonCreate.Click();
+		}
 	}
 }
