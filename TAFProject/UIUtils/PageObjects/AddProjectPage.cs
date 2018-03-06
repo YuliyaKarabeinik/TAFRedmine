@@ -4,8 +4,8 @@ using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
-    public class AddProjectPage : BasePage
-    {
+	public class AddProjectPage : BasePage
+	{
 		Dictionary<string, By> locators = new Dictionary<string, By>()
 		{
 			{ "name", By.XPath("//input[@id='project_name']") },
@@ -19,9 +19,9 @@ namespace TAFProject.UIUtils.PageObjects
 			{ "positiveNotification", By.XPath("//*[@id='flash_notice']") },
 			{ "negativeNotification", By.XPath("//*[@id='errorExplanation']") }
 		};
-        BaseElement inputProjectName, inputProjectDescription, inputProjectIdentifier,
-            inputHomepage, checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
-        BaseElement notificationAboutCreation;
+		BaseElement inputProjectName, inputProjectDescription, inputProjectIdentifier,
+			inputHomepage, checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
+		BaseElement notificationAboutCreation;
 
 		public void WriteName(string projectName)
 		{
@@ -72,12 +72,12 @@ namespace TAFProject.UIUtils.PageObjects
 		}
 
 		public bool IsPositiveNotificationAppear()
-        {
-            notificationAboutCreation = SearchElementUtil.GetElement(locators["positiveNotification"]);
+		{
+			notificationAboutCreation = SearchElementUtil.GetElement(locators["positiveNotification"]);
 			if (notificationAboutCreation.Displayed)
-                return true;
-            return false;
-        }
+				return true;
+			return false;
+		}
 
 		public bool IsNegativeNotificationAppear()
 		{
@@ -87,7 +87,7 @@ namespace TAFProject.UIUtils.PageObjects
 			return false;
 		}
 
-		private void Check (BaseElement element)
+		private void Check(BaseElement element)
 		{
 			if (!element.Selected)
 				element.Click();

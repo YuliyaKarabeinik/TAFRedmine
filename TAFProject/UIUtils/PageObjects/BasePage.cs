@@ -7,7 +7,7 @@ namespace TAFProject.UIUtils.PageObjects
 {
 	public abstract class BasePage
 	{
-	    protected Browser browser = Browser.Instance;
+		protected Browser browser = Browser.Instance;
 		public BasePage()
 		{
 			new WebDriverWait(browser.Driver, TimeSpan.FromSeconds(browser.ImpWait)).

@@ -3,9 +3,9 @@ using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
-    public class LoginPage : BasePage
-    {
-        By textboxUserLocator = By.Id("username");
+	public class LoginPage : BasePage
+	{
+		By textboxUserLocator = By.Id("username");
 		By textboxPasswordLocator = By.Id("password");
 		By loginButtonLocator = By.XPath("//input[@type='submit']");
 		BaseElement textboxUser, textboxPassword, loginButton;
@@ -28,5 +28,5 @@ namespace TAFProject.UIUtils.PageObjects
 			loginButton.Click();
 			return new HomePage();
 		}
-    }
+	}
 }

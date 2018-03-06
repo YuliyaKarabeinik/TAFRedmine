@@ -42,12 +42,12 @@ namespace TAFProject.Utils
 			}
 		}
 
-        public static string StartUrl => GetConfigSettings(keyStartUrl, defaultStartUrl);
+		public static string StartUrl => GetConfigSettings(keyStartUrl, defaultStartUrl);
 
-        private static string GetConfigSettings(string key, string defaultValue)
-        {
-            return ConfigurationManager.AppSettings[key] ?? defaultValue;
-        }
+		private static string GetConfigSettings(string key, string defaultValue)
+		{
+			return ConfigurationManager.AppSettings[key] ?? defaultValue;
+		}
 
 		private static bool IsCorrectTimeout(int timeOutSec) => timeOutSec > 0;
 	}

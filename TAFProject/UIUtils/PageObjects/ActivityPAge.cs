@@ -4,14 +4,14 @@ using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
-    class ActivityPage : BasePage
-    {
-        By activityContentLocator = By.Id("activity");
+	class ActivityPage : BasePage
+	{
+		By activityContentLocator = By.Id("activity");
 		BaseElement activityContent;
 		public bool IsIssueAdded(string issueName)
-        {
+		{
 			activityContent = SearchElementUtil.GetElement(activityContentLocator);
-			return activityContent.FindElements(By.XPath("//dl//a")).Any(element => element.Text==issueName);
-        }		
-    }
+			return activityContent.FindElements(By.XPath("//dl//a")).Any(element => element.Text == issueName);
+		}
+	}
 }

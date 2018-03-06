@@ -5,20 +5,20 @@ using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
-    public enum IssueType
-    {
-        Default, Task, ChangeRequest
-    }
-    public enum IssueStatus
-    {
-        Default, New, NeedInfo, Assigned, Closed
-    }
-    public enum IssuePriority
-    {
-        Default, Lowest, Low, Medium, High, Highest
-    }
-    public class AddIssuePage : BasePage
-    {
+	public enum IssueType
+	{
+		Default, Task, ChangeRequest
+	}
+	public enum IssueStatus
+	{
+		Default, New, NeedInfo, Assigned, Closed
+	}
+	public enum IssuePriority
+	{
+		Default, Lowest, Low, Medium, High, Highest
+	}
+	public class AddIssuePage : BasePage
+	{
 		Dictionary<string, By> locators = new Dictionary<string, By>()
 		{
 			{ "type", By.XPath("//select[@id='issue_tracker_id']") },
@@ -27,10 +27,10 @@ namespace TAFProject.UIUtils.PageObjects
 			{ "status", By.XPath("//input[@id='project_homepage']") },
 			{ "priority", By.XPath("//input[@id='project_is_public']") },
 			{ "buttonCreate", By.XPath("//select[@id='project_parent_id']") }
-		};		
+		};
 		SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
-        BaseElement textboxSubject, textboxDescription, buttonCreate;
-		
+		BaseElement textboxSubject, textboxDescription, buttonCreate;
+
 		//static BaseElement newIssueNumber = new BaseElement("//*[@id=\"flash_notice\"]/a");
 		//private string createdIssueNumber = GetIssueNumber();
 
@@ -38,7 +38,7 @@ namespace TAFProject.UIUtils.PageObjects
 		//{
 		//	return newIssueNumber.Text;
 		//}
-		public void ChooseType (IssueType type)
+		public void ChooseType(IssueType type)
 		{
 			comboboxIssueType = new SelectElement(SearchElementUtil.GetElement(locators["type"]));
 			if (type != IssueType.Default)
@@ -70,6 +70,6 @@ namespace TAFProject.UIUtils.PageObjects
 		{
 			buttonCreate = SearchElementUtil.GetElement(locators["buttonCreate"]);
 			buttonCreate.Click();
-		}				
-    }
+		}
+	}
 }

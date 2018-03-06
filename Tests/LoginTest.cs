@@ -4,18 +4,18 @@ using TAFProject.Utils;
 
 namespace Tests
 {
-    [TestFixture]
-    class LoginTest : BaseTest
-    {
+	[TestFixture]
+	class LoginTest : BaseTest
+	{
 		string user = "TAT18";
 		string password = "tat18pass";
 
 		[SetUp]
-        public void InitialTest()
-        {
+		public void InitialTest()
+		{
 			if (Steps.IsLogIn())
-                Steps.LogOut();
-        }
+				Steps.LogOut();
+		}
 
 		[TearDown]
 		public void CloseTest()
@@ -25,10 +25,10 @@ namespace Tests
 		}
 
 		[Test]
-        public void CorrectLoginTest()
-        {
+		public void CorrectLoginTest()
+		{
 			Steps.Login(user, password);
-            Assert.True(Steps.IsLogIn(user));
-        }
-    }
+			Assert.True(Steps.IsLogIn(user));
+		}
+	}
 }
