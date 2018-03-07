@@ -31,8 +31,8 @@ namespace TAFProject.UIUtils.PageObjects
 		public List<string> GetIssuesSubjectList()
 		{
 			List<string> subjectList = new List<string>();
-			foreach (IWebElement subjectElement in FindElements(By.XPath("//tbody//td[@class='subject']")))
-			{
+			foreach (IWebElement subjectElement in FindElements(By.XPath("//tbody//td[@class='subject']")))//LINQ
+            {
 				subjectList.Add(subjectElement.Text);
 			}
 			return subjectList;
