@@ -1,102 +1,100 @@
 ﻿using OpenQA.Selenium;
-using System.Collections.Generic;
+using TAFProject.Models;
 using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
     public class AddProjectPage : BasePage
     {
-        readonly Dictionary<string, By> locators = new Dictionary<string, By>()
-        {
-            { "name", By.XPath("//input[@id='project_name']") }, //enum, а лучше поля
-		{ "description", By.XPath("//textarea[@id='project_description']") },
-            { "identifier", By.XPath("//input[@id='project_identifier']") },
-            { "homepage", By.XPath("//input[@id='project_homepage']") },
-            { "public", By.XPath("//input[@id='project_is_public']") },
-            { "subprojectOf", By.XPath("//select[@id='project_parent_id']") },
-            { "inheritMembers", By.XPath("//input[@id='project_inherit_members']") },
-            { "buttonCreate", By.XPath("//input[@type='submit']") },
-            { "positiveNotification", By.XPath("//*[@id='flash_notice']") },
-            { "negativeNotification", By.XPath("//*[@id='errorExplanation']") }
-        };
-        BaseElement inputProjectName, inputProjectDescription, inputProjectIdentifier,
-            inputHomepage, checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
+        static readonly By locatorInputProjectName = By.XPath("//input[@id='project_name']"),
+            locatorInputProjectDescription = By.XPath("//textarea[@id='project_description']"),
+            locatorInputProjectIdentifier = By.XPath("//input[@id='project_identifier']"),
+            locatorInputHomepage = By.XPath("//input[@id='project_homepage']"),
+            locatorCheckboxPublic = By.XPath("//input[@id='project_is_public']"),
+            locatorComboboxSubOf = By.XPath("//select[@id='project_parent_id']"),
+            locatorCheckboxInheritMembers = By.XPath("//input[@id='project_inherit_members']"),
+            locatorButtonCreate = By.XPath("//input[@type='submit']"),
+            locatorPositiveNotification = By.XPath("//*[@id='flash_notice']"),
+            locatorNegativeNotification = By.XPath("//*[@id='errorExplanation']");
+
+        BaseElement inputProjectName, inputProjectDescription, inputProjectIdentifier, inputHomepage,
+            checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
         BaseElement notificationAboutCreation;
 
-
-        public void WriteName(string projectName)
+        public AddProjectPage SetName(string projectName)
         {
-            inputProjectName = SearchElementUtil.GetElement(locators["name"]);
+            inputProjectName = SearchElementUtil.GetElement(locatorInputProjectName);
             inputProjectName.SendKeys(projectName);
+            return this;
         }
-        public void WriteDescription(string projectDescription)
+        public AddProjectPage SetDescription(string projectDescription)
         {
-            inputProjectDescription = SearchElementUtil.GetElement(locators["description"]);
+            inputProjectDescription = SearchElementUtil.GetElement(locatorInputProjectDescription);
             inputProjectDescription.SendKeys(projectDescription);
+            return this;
         }
-        public void WriteIdentifier(string projectIdentifier)
+        public AddProjectPage SetIdentifier(string projectIdentifier)
         {
-            inputProjectIdentifier = SearchElementUtil.GetElement(locators["identifier"]);
+            inputProjectIdentifier = SearchElementUtil.GetElement(locatorInputProjectIdentifier);
             inputProjectIdentifier.Clear();
             inputProjectIdentifier.SendKeys(projectIdentifier);
+            return this;
         }
-        public void WriteHomepage(string homepage)
+
+        public AddProjectPage SetHomepage(string homepage)
         {
-            inputHomepage = SearchElementUtil.GetElement(locators["homepage"]);
+            inputHomepage = SearchElementUtil.GetElement(locatorInputHomepage);
             inputHomepage.SendKeys(homepage);
+            return this;
         }
-        public void CheckPublic( /*bool param*/) //SelectPublic
+
+        public AddProjectPage SelectPublic(bool tickParam = true)
         {
-            checkboxPublic = SearchElementUtil.GetElement(locators["public"]);
-            Check(checkboxPublic);
+            checkboxPublic = SearchElementUtil.GetElement(locatorCheckboxPublic);
+            if (tickParam)
+                checkboxPublic.Check();
+            else
+                checkboxPublic.Uncheck();
+            return this;
         }
-        //public void UncheckPublic()
-        //{
-        //	checkboxPublic = SearchElementUtil.GetElement(locators["public"]);
-        //	Uncheck(checkboxPublic);
-        //}
-        public void CheckInheritMembers()
+
+        public AddProjectPage SelectInheritMembers(bool tickParam = true)
         {
-            checkboxInheritMembers = SearchElementUtil.GetElement(locators["inheritMembers"]);
-            Check(checkboxInheritMembers);
+            checkboxInheritMembers = SearchElementUtil.GetElement(locatorCheckboxInheritMembers);
+            if (tickParam)
+                checkboxInheritMembers.Check();
+            else
+                checkboxInheritMembers.Uncheck();
+            return this;
         }
-        public void UncheckInheritMembers()
-        {
-            checkboxInheritMembers = SearchElementUtil.GetElement(locators["inheritMembers"]);
-            Uncheck(checkboxInheritMembers);
-        }
+
         public AddProjectPage ClickCreate()
         {
-            buttonCreate = SearchElementUtil.GetElement(locators["buttonCreate"]);
+            buttonCreate = SearchElementUtil.GetElement(locatorButtonCreate);
             buttonCreate.Click();
             return this;
         }
 
-        public bool IsPositiveNotificationAppear() //getNotification - возвр.enum или string
+        public string GetNotificationAboutCreationText()
         {
-            notificationAboutCreation = SearchElementUtil.GetElement(locators["positiveNotification"]);
-            if (notificationAboutCreation.Displayed)
-                return true;
-            return false;
+            if (!IsSuccessfulCreation())
+                notificationAboutCreation = SearchElementUtil.GetElement(locatorNegativeNotification);
+            return notificationAboutCreation.Text;
         }
 
-        public bool IsNegativeNotificationAppear()
+        //where should use??
+        public Enums.Notifications GetCreationResult()
         {
-            notificationAboutCreation = SearchElementUtil.GetElement(locators["negativeNotification"]);
-            if (notificationAboutCreation.Displayed)
-                return true;
-            return false;
+            if (IsSuccessfulCreation())
+                return Enums.Notifications.Positive;
+            notificationAboutCreation = SearchElementUtil.GetElement(locatorNegativeNotification);
+            return Enums.Notifications.Negative;
         }
 
-        private void Check(BaseElement element) //в BaseElement
+        public bool IsSuccessfulCreation()
         {
-            if (!element.Selected)
-                element.Click();
-        }
-        private void Uncheck(BaseElement element)
-        {
-            if (element.Selected)
-                element.Click();
+            notificationAboutCreation = SearchElementUtil.GetElement(locatorPositiveNotification);
+            return notificationAboutCreation!=null&&notificationAboutCreation.Displayed;
         }
     }
 }

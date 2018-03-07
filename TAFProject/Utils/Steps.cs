@@ -7,8 +7,8 @@ namespace TAFProject.Utils
         public static void Login(string login, string password)
         {
             LoginPage loginPage = new LoginPage();
-            loginPage.WriteUser(login);
-            loginPage.WritePassword(password);
+            loginPage.SetUser(login);
+            loginPage.SetPassword(password);
             loginPage.ClickSubmit();
             RedmineNavigation.GoTo<HomePage>(Pages.Home);
         }
@@ -31,21 +31,22 @@ namespace TAFProject.Utils
         {
             RedmineNavigation.GoTo<AddProjectPage>(Pages.NewProject);
             var newProject = new AddProjectPage();
-            newProject.WriteName(projectName);
-            newProject.WriteIdentifier(projectIdentifier);
+            newProject.SetName(projectName);
+            newProject.SetIdentifier(projectIdentifier);
             newProject.ClickCreate();
+        }
+
+        public static bool IsProjectCreated(out string notificationText)
+        {
+            AddProjectPage page = new AddProjectPage();
+            notificationText = page.GetNotificationAboutCreationText();
+            return page.IsSuccessfulCreation();
         }
 
         public static bool IsProjectCreated()
         {
             AddProjectPage page = new AddProjectPage();
-            return page.IsPositiveNotificationAppear();
-        }
-
-        public static bool IsProjectCreationFailed()
-        {
-            AddProjectPage page = new AddProjectPage();
-            return page.IsNegativeNotificationAppear();
+            return page.IsSuccessfulCreation();
         }
 
         public static void AddIssue(string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",

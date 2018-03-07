@@ -8,7 +8,7 @@ namespace TAFProject.Utils
         Chrome,
         Firefox
     }
-    static class Configuration
+    public static class Configuration
     {
         private const string KeyTimeout = "elementTimeout";
         private const string KeyBrowser = "browser";

@@ -16,7 +16,6 @@ namespace TAFProject.UIUtils.Driver
                              $"\nStart Url: {Configuration.StartUrl}" +
                              $"\nTimeout: {Configuration.ElementTimeout}");
             browser.WindowMaximise();
-            browser.GoToUrl(Configuration.StartUrl);//setup
         }
 
         [OneTimeTearDown]

@@ -12,7 +12,7 @@ namespace TAFProject.UIUtils.Driver
 
         private Browser()
         {
-            ImpWait = Configuration.ElementTimeout;
+            ImpWait = Configuration.ElementTimeout;//не должно быть обращения к Config!
             browserTypeFromConfig = Configuration.Browser;
             Driver = BrowserFactory.GetDriver(browserTypeFromConfig, ImpWait);
         }

@@ -73,5 +73,16 @@ namespace TAFProject.UIUtils.Driver
         public IWebElement FindElement(By by) => new BaseElement(element.FindElement(by));
 
         public ReadOnlyCollection<IWebElement> FindElements(By by) => element.FindElements(by);
+
+        public void Check() 
+        {
+            if (!element.Selected)
+                element.Click();
+        }
+        public void Uncheck()
+        {
+            if (element.Selected)
+                element.Click();
+        }
     }
 }

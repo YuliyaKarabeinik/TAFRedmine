@@ -13,6 +13,7 @@ namespace Tests
         [SetUp]
         public void InitialTest()
         {
+            browser.GoToUrl(Configuration.StartUrl);
             if (Steps.IsLogIn())
                 Steps.LogOut();
         }

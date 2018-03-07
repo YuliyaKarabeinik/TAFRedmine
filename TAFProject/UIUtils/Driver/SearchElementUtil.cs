@@ -13,7 +13,7 @@ namespace TAFProject.UIUtils.Driver
             }
             catch (NoSuchElementException)
             {
-                return null;
+                return null;//ошибка запрячется глубже(
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Runtime.InteropServices;
+using NUnit.Framework;
 using TAFProject.UIUtils.Driver;
 using TAFProject.Utils;
 
@@ -13,6 +14,7 @@ namespace Tests
         [SetUp]
         public void LogIn()
         {
+            browser.GoToUrl(Configuration.StartUrl);
             Steps.Login(login, password);
         }
 
@@ -42,7 +44,7 @@ namespace Tests
         public void AddProjectNegativeTest()
         {
             Steps.AddProject(name, incorrectIdentifier);
-            Assert.IsTrue(Steps.IsProjectCreationFailed());
+            Assert.IsFalse(Steps.IsProjectCreated());
         }
     }
 }
