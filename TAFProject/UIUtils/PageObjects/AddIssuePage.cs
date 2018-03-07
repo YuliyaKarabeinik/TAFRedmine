@@ -49,10 +49,11 @@ namespace TAFProject.UIUtils.PageObjects
                 comboboxPriority.SelectByText(priority.ToString());
             return this;
         }
-        public void ClickCreate()
+        public CreatedIssuePage ClickCreate()
         {
             buttonCreate = SearchElementUtil.GetElement(locatorButtonCreate);
             buttonCreate.Click();
+            return new CreatedIssuePage();
         }
     }
 }

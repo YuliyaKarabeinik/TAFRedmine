@@ -1,4 +1,5 @@
-﻿using TAFProject.UIUtils.PageObjects;
+﻿using TAFProject.Models;
+using TAFProject.UIUtils.PageObjects;
 
 namespace TAFProject.Utils
 {
@@ -49,16 +50,16 @@ namespace TAFProject.Utils
             return page.IsSuccessfulCreation();
         }
 
-        public static void AddIssue(string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
-            IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
+        public static void AddIssue(string projectIdentifier, string issueSubject, Enums.IssueType type = Enums.IssueType.Default, string issueDescription = "",
+            Enums.IssueStatus status = Enums.IssueStatus.Default, Enums.IssuePriority priority = Enums.IssuePriority.Default)
         {
             RedmineNavigation.GoTo<AddIssuePage>(Pages.NewIssue, projectIdentifier);
             var newIssue = new AddIssuePage();
-            newIssue.ChooseType(type);
-            newIssue.WriteSubject(issueSubject);
-            newIssue.WriteDescription(issueDescription);
-            newIssue.ChooseStatus(status);
-            newIssue.ChoosePriority(priority);
+            newIssue.SelectType(type);
+            newIssue.SetSubject(issueSubject);
+            newIssue.SetDescription(issueDescription);
+            newIssue.SelectStatus(status);
+            newIssue.SelectPriority(priority);
             newIssue.ClickCreate();
         }
     }

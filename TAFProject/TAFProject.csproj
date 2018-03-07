@@ -73,6 +73,7 @@
     <Compile Include="UIUtils\PageObjects\AddIssuePage.cs" />
     <Compile Include="UIUtils\PageObjects\AddProjectPage.cs" />
     <Compile Include="UIUtils\PageObjects\BasePage.cs" />
+    <Compile Include="UIUtils\PageObjects\CreatedIssuePage.cs" />
     <Compile Include="UIUtils\PageObjects\HomePage.cs" />
     <Compile Include="UIUtils\PageObjects\IssueTableElement.cs" />
     <Compile Include="UIUtils\PageObjects\LoginPage.cs" />
