@@ -14,24 +14,24 @@ namespace TAFProject.UIUtils.Driver
             switch (type)
             {
                 case BrowserType.Chrome:
-                {
-                    var service = ChromeDriverService.CreateDefaultService();//?path to driver.exe
-                    ChromeOptions options = new ChromeOptions();
-                    options.AddArgument("disable-infobars");//hiding warning window
-                    //driver = new ChromeDriver();
-                    driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(timeOutSec));
-                    break;
-                }
+                    {
+                        var service = ChromeDriverService.CreateDefaultService();//?path to driver.exe
+                        ChromeOptions options = new ChromeOptions();
+                        options.AddArgument("disable-infobars");//hiding warning window
+                                                                //driver = new ChromeDriver();
+                        driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(timeOutSec));
+                        break;
+                    }
 
                 case BrowserType.Firefox:
-                {
-                    var service = FirefoxDriverService.CreateDefaultService();
-                    var options = new FirefoxOptions();
-                    options.AddArgument("disable-infobars");//hiding warning window
-                    //driver = new FirefoxDriver(service, options, TimeSpan.FromSeconds(timeOutSec));
-                    driver = new FirefoxDriver();
-                    break;
-                }
+                    {
+                        var service = FirefoxDriverService.CreateDefaultService();
+                        var options = new FirefoxOptions();
+                        options.AddArgument("disable-infobars");//hiding warning window
+                                                                //driver = new FirefoxDriver(service, options, TimeSpan.FromSeconds(timeOutSec));
+                        driver = new FirefoxDriver();
+                        break;
+                    }
                 default:
                     goto case BrowserType.Chrome;
             }

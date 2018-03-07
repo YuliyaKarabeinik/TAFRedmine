@@ -7,14 +7,14 @@ namespace TAFProject.UIUtils.Driver
     {
         static Browser _instance;
         BrowserType browserTypeFromConfig;
-        public int ImpWait {get; }
+        public int ImpWait { get; }
         public IWebDriver Driver { get; private set; }
 
         private Browser()
         {
             ImpWait = Configuration.ElementTimeout;
-			browserTypeFromConfig = Configuration.Browser;
-			Driver = BrowserFactory.GetDriver(browserTypeFromConfig, ImpWait);
+            browserTypeFromConfig = Configuration.Browser;
+            Driver = BrowserFactory.GetDriver(browserTypeFromConfig, ImpWait);
         }
 
         public static Browser Instance => _instance ?? (_instance = new Browser());
@@ -34,12 +34,12 @@ namespace TAFProject.UIUtils.Driver
             return Driver.FindElement(locator);
         }
 
-		public void Close()
-		{
-			Driver.Close();
-		}
+        public void Close()
+        {
+            Driver.Close();
+        }
 
-		public void Quit()
+        public void Quit()
         {
             Driver.Quit();
             _instance = null;

@@ -43,11 +43,11 @@ namespace TAFProject.UIUtils.Driver
             this.element = element;
         }
 
-		public void SendKeys(string text)
-		{
-			new WebDriverWait(browser.Driver, TimeSpan.FromSeconds(browser.ImpWait)).Until(driver => driver.FindElement(locator));
-			element.SendKeys(text);
-		}
+        public void SendKeys(string text)
+        {
+            new WebDriverWait(browser.Driver, TimeSpan.FromSeconds(browser.ImpWait)).Until(driver => driver.FindElement(locator));
+            element.SendKeys(text);
+        }
 
         public void Click()
         {
