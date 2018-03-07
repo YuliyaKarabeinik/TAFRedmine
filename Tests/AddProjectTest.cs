@@ -17,33 +17,33 @@ namespace Tests
             Steps.Login(login, password);
         }
 
-        [TearDown]
-        public void CloseTest()
-        {
-            browser.Close();
-            //Logging.Log.Info($"Test Login: {TestStatus}");
-        }
-        static string name = RandomGenerator.GetRandomString(5);
-        static string identifier = RandomGenerator.GetRandomString(5);
+	 //   private string prjName;
+
+	    
+	   
+		static string name = "Name".GetRandomString(5);
+        static string identifier = "Identifier".GetRandomString(5);
         static string incorrectIdentifier = "";
 
-        //static object[] incorrectProjectFields = {
-        //	new object [] {RandomGenerator.GetRandomString(5), ""}
-        //};
-
+   
         [Test]
         public void AddProjectPositiveTest()
         {
-            Steps.AddProject(name, identifier);
+			Steps.AddProject(name, identifier);
             Assert.IsTrue(Steps.IsProjectCreated());
         }
 
-        //[Test, TestCaseSource("incorrectProjectFields")]
-        [Test]
+		[Test]
         public void AddProjectNegativeTest()
         {
             Steps.AddProject(name, incorrectIdentifier);
             Assert.IsFalse(Steps.IsProjectCreated());
         }
-    }
+
+	    [TearDown]
+	    public void CloseTest()
+	    {
+		    browser.Close();
+	    }
+	}
 }

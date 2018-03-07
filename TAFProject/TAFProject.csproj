@@ -78,7 +78,8 @@
     <Compile Include="UIUtils\PageObjects\IssueTableElement.cs" />
     <Compile Include="UIUtils\PageObjects\LoginPage.cs" />
     <Compile Include="Utils\Configuration.cs" />
-    <Compile Include="Utils\Logging.cs" />
+    <Compile Include="Utils\ILogger.cs" />
+    <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\RedmineNavigation.cs" />
     <Compile Include="Utils\RandomGenerator.cs" />
     <Compile Include="Utils\Steps.cs" />

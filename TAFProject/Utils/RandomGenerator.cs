@@ -5,16 +5,17 @@ namespace TAFProject.Utils
 {
     public static class RandomGenerator
     {
-        public static string GetRandomString(int length)
+        public static string GetRandomString(this string message, int length)
         {
             string chars = "wrtpsdfghjklxcvbznm0123456789";
             Random random = new Random();
-            string result = new string(
-                Enumerable.Repeat(chars, length)
-                    .Select(s => s[random.Next(s.Length)])
-                    .ToArray());
+           // string result = new string(
 
-            return result;
+	        message = Enumerable.Repeat(chars, length)
+		        .Select(s => s[random.Next(s.Length)])
+		        .ToString();
+
+            return message;
         }
     }
 }

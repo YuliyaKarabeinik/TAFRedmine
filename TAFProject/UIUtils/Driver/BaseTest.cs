@@ -6,12 +6,13 @@ namespace TAFProject.UIUtils.Driver
     public class BaseTest
     {
         protected static Browser browser = Browser.Instance;
-
-        [OneTimeSetUp]
+	    protected static Logger logger = Logger.Instance;
+		[OneTimeSetUp]
         public void InitTest()
         {
-            Logging.InitLogger();
-            Logging.Log.Info($"Settings: " +
+
+	        logger.InitLogger();
+	        logger.Log.Info($"Settings: " +
                              $"\nCurrent browser: {Configuration.Browser}" +
                              $"\nStart Url: {Configuration.StartUrl}" +
                              $"\nTimeout: {Configuration.ElementTimeout}");

@@ -13,17 +13,19 @@ namespace Tests
         [SetUp]
         public void InitialTest()
         {
+			logger.Log.Info("Test LogIn started");
             browser.GoToUrl(Configuration.StartUrl);
             if (Steps.IsLogIn())
                 Steps.LogOut();
+	        var res = TestContext.CurrentContext.Result;
+	        logger.Log.Info($"Test finished with status: {res}");
         }
 
         [TearDown]
         public void CloseTest()
         {
             browser.Close();
-            //Logging.Log.Info($"Test Login: {TestStatus}");
-        }
+         }
 
         [Test]
         public void CorrectLoginTest()
