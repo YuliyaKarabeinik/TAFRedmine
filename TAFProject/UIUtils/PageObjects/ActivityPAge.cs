@@ -6,7 +6,7 @@ namespace TAFProject.UIUtils.PageObjects
 {
     class ActivityPage : BasePage
     {
-        readonly By activityContentLocator = By.Id("activity");
+        static readonly By activityContentLocator = By.Id("activity");
         BaseElement activityContent;
 
         public bool IsIssueAdded(string issueName)

@@ -6,10 +6,10 @@ namespace TAFProject.UIUtils.PageObjects
 {
     public class AddProjectPage : BasePage
     {
-        static readonly By locatorInputProjectName = By.XPath("//input[@id='project_name']"),
-            locatorInputProjectDescription = By.XPath("//textarea[@id='project_description']"),
-            locatorInputProjectIdentifier = By.XPath("//input[@id='project_identifier']"),
-            locatorInputHomepage = By.XPath("//input[@id='project_homepage']"),
+        static readonly By locatorTextboxProjectName = By.XPath("//input[@id='project_name']"),
+            locatorTextboxProjectDescription = By.XPath("//textarea[@id='project_description']"),
+            locatorTextboxProjectIdentifier = By.XPath("//input[@id='project_identifier']"),
+            locatorTextboxHomepage = By.XPath("//input[@id='project_homepage']"),
             locatorCheckboxPublic = By.XPath("//input[@id='project_is_public']"),
             locatorComboboxSubOf = By.XPath("//select[@id='project_parent_id']"),
             locatorCheckboxInheritMembers = By.XPath("//input[@id='project_inherit_members']"),
@@ -17,34 +17,34 @@ namespace TAFProject.UIUtils.PageObjects
             locatorPositiveNotification = By.XPath("//*[@id='flash_notice']"),
             locatorNegativeNotification = By.XPath("//*[@id='errorExplanation']");
 
-        BaseElement inputProjectName, inputProjectDescription, inputProjectIdentifier, inputHomepage,
+        BaseElement textboxProjectName, textboxProjectDescription, textboxProjectIdentifier, textboxHomepage,
             checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
         BaseElement notificationAboutCreation;
 
         public AddProjectPage SetName(string projectName)
         {
-            inputProjectName = SearchElementUtil.GetElement(locatorInputProjectName);
-            inputProjectName.SendKeys(projectName);
+            textboxProjectName = SearchElementUtil.GetElement(locatorTextboxProjectName);
+            textboxProjectName.SendKeys(projectName);
             return this;
         }
         public AddProjectPage SetDescription(string projectDescription)
         {
-            inputProjectDescription = SearchElementUtil.GetElement(locatorInputProjectDescription);
-            inputProjectDescription.SendKeys(projectDescription);
+            textboxProjectDescription = SearchElementUtil.GetElement(locatorTextboxProjectDescription);
+            textboxProjectDescription.SendKeys(projectDescription);
             return this;
         }
         public AddProjectPage SetIdentifier(string projectIdentifier)
         {
-            inputProjectIdentifier = SearchElementUtil.GetElement(locatorInputProjectIdentifier);
-            inputProjectIdentifier.Clear();
-            inputProjectIdentifier.SendKeys(projectIdentifier);
+            textboxProjectIdentifier = SearchElementUtil.GetElement(locatorTextboxProjectIdentifier);
+            textboxProjectIdentifier.Clear();
+            textboxProjectIdentifier.SendKeys(projectIdentifier);
             return this;
         }
 
         public AddProjectPage SetHomepage(string homepage)
         {
-            inputHomepage = SearchElementUtil.GetElement(locatorInputHomepage);
-            inputHomepage.SendKeys(homepage);
+            textboxHomepage = SearchElementUtil.GetElement(locatorTextboxHomepage);
+            textboxHomepage.SendKeys(homepage);
             return this;
         }
 
