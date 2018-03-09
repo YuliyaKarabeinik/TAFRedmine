@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Internal;
 using TAFProject.UIUtils.Driver;
 using TAFProject.Utils;
 
@@ -7,43 +8,34 @@ namespace Tests
     [TestFixture]
     class AddProjectTest : BaseTest
     {
-        string login = "TAT18";
-        string password = "tat18pass";
 
-        [SetUp]
-        public void LogIn()
-        {
-            browser.GoToUrl(Configuration.StartUrl);
-            Steps.Login(login, password);
-        }
+		static string projectName= "Name".GetRandomString(5);
 
-	 //   private string prjName;
-
-	    
-	   
-		static string name = "Name".GetRandomString(5);
-        static string identifier = "Identifier".GetRandomString(5);
+	    private static string projectIdentifier = "ident".GetRandomString(5);
         static string incorrectIdentifier = "";
 
    
         [Test]
         public void AddProjectPositiveTest()
         {
-			Steps.AddProject(name, identifier);
-            Assert.IsTrue(Steps.IsProjectCreated());
-        }
+	     	logger.Log.Info($"Test AddProject started with parameters:\n project name: {projectName}, identifier {projectIdentifier}");
+			Steps.AddProject(projectName, projectIdentifier);
+	    	Assert.IsTrue(Steps.IsProjectCreated());
+		}
 
 		[Test]
         public void AddProjectNegativeTest()
         {
-            Steps.AddProject(name, incorrectIdentifier);
+	        logger.Log.Info($"Test AddProject started with parameters:\n project name: {projectName}, identifier {projectIdentifier}");
+			Steps.AddProject(projectName, incorrectIdentifier);
             Assert.IsFalse(Steps.IsProjectCreated());
         }
 
 	    [TearDown]
 	    public void CloseTest()
 	    {
-		    browser.Close();
+		    logger.Log.Info($"Test finished with status: {TestContext.CurrentContext.Result.Outcome}");
+			browser.Close();
 	    }
 	}
 }

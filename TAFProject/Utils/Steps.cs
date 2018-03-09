@@ -38,20 +38,20 @@ namespace TAFProject.Utils
             newProject.ClickCreate();
         }
 
-        public static bool IsProjectCreated(out string notificationText)
-        {
-            AddProjectPage page = new AddProjectPage();
-            notificationText = page.GetNotificationAboutCreationText();
-            return page.IsSuccessfulCreation();
-        }
-
         public static bool IsProjectCreated()
         {
             AddProjectPage page = new AddProjectPage();
             return page.IsSuccessfulCreation();
         }
 
-        public static void AddIssue(string projectIdentifier, string issueSubject, Enums.IssueType type = Enums.IssueType.Default, string issueDescription = "",
+	    public static bool IsProjectCreated(out string notificationText)
+	    {
+		    AddProjectPage page = new AddProjectPage();
+		    notificationText = page.GetNotificationAboutCreationText();
+		    return page.IsSuccessfulCreation();
+	    }
+
+		public static void AddIssue(string projectIdentifier, string issueSubject, Enums.IssueType type = Enums.IssueType.Default, string issueDescription = "",
             Enums.IssueStatus status = Enums.IssueStatus.Default, Enums.IssuePriority priority = Enums.IssuePriority.Default)
         {
             RedmineNavigation.GoTo<AddIssuePage>(Pages.NewIssue, projectIdentifier);

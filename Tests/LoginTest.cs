@@ -8,9 +8,7 @@ namespace Tests
     [TestFixture]
     class LoginTest : BaseTest
     {
-     //   string user = "TAT18";
-     //   string password = "tat18pass";
-
+    
         [SetUp]
         public void InitTest()
         {
@@ -19,24 +17,17 @@ namespace Tests
 	        logger.Log.Info("Logout");
 		}
      
-
         [Test]
         public void CorrectLoginTest()
         {
-	       // logger.InitLogger();
-	        logger.Log.Info("Test LogIn started");
+			logger.Log.Info($"Test LogIn started with parameters:\n login: {user}, password {password}");
 			Steps.Login(user, password);
             Assert.True(Steps.IsLogIn(user));
-
-			// var res = TestContext.CurrentContext.Result.Outcome.Status;
-
-			logger.Log.Info($"Test finished with status: {TestContext.CurrentContext.Result.Outcome.Status}");
 		}
 	    [TearDown]
 	    public void CloseTest()
 	    {
 		    logger.Log.Info($"Test finished with status: {TestExecutionContext.CurrentContext.CurrentResult.ResultState.Status}");
-
 			browser.Close();
 	    }
 	}

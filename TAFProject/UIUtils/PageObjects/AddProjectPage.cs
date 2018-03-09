@@ -19,6 +19,7 @@ namespace TAFProject.UIUtils.PageObjects
 
         BaseElement textboxProjectName, textboxProjectDescription, textboxProjectIdentifier, textboxHomepage,
             checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
+
         BaseElement notificationAboutCreation;
 
         public AddProjectPage SetName(string projectName)
@@ -82,19 +83,21 @@ namespace TAFProject.UIUtils.PageObjects
             return notificationAboutCreation.Text;
         }
 
-        //where should use??
-        public Enums.Notifications GetCreationResult()
-        {
-            if (IsSuccessfulCreation())
-                return Enums.Notifications.Positive;
-            notificationAboutCreation = SearchElementUtil.GetElement(locatorNegativeNotification);
-            return Enums.Notifications.Negative;
-        }
-
+       
         public bool IsSuccessfulCreation()
         {
             notificationAboutCreation = SearchElementUtil.GetElement(locatorPositiveNotification);
-            return notificationAboutCreation!=null&&notificationAboutCreation.Displayed;
+            return notificationAboutCreation!=null && notificationAboutCreation.Displayed;
         }
-    }
+
+	    //where should use??
+		public Enums.Notifications GetCreationResult()
+	    {
+		    if (IsSuccessfulCreation())
+			    return Enums.Notifications.Positive;
+		    notificationAboutCreation = SearchElementUtil.GetElement(locatorNegativeNotification);
+		    return Enums.Notifications.Negative;
+	    }
+
+	}
 }

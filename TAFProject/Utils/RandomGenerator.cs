@@ -11,11 +11,14 @@ namespace TAFProject.Utils
             Random random = new Random();
            // string result = new string(
 
-	        message = Enumerable.Repeat(chars, length)
-		        .Select(s => s[random.Next(s.Length)])
-		        .ToString();
+	     //  string messageOut
+		       //message= new string(Enumerable.Repeat(chars, length)
+		       // .Select(s => s[random.Next(s.Length)])
+		       // .ToArray());
 
-            return message;
+	        return string.Concat(message,new string(Enumerable.Repeat(chars, length)
+		        .Select(s => s[random.Next(s.Length)]).ToArray()));
+
         }
     }
 }
