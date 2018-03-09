@@ -6,7 +6,7 @@ namespace TAFProject.UIUtils.PageObjects
     public class HomePage : BasePage
     {
         static readonly By loginIdentifierLocator = By.XPath("//*[@id='loggedas']//*[@class='user active']"),
-            logoutLocator = By.XPath("//a[@class='logout']");
+						   logoutLocator = By.XPath("//a[@class='logout']");
         BaseElement logout, loginIdentifier;
 
         public HomePage()

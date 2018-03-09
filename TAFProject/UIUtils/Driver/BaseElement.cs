@@ -9,7 +9,8 @@ namespace TAFProject.UIUtils.Driver
     class BaseElement : IWebElement
     {
         readonly Browser browser = Browser.Instance;
-        readonly By locator;
+
+	    readonly By locator;
         IWebElement element;
 
         public string Text => element.Text;

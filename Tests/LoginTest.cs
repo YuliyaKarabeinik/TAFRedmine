@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Internal;
 using TAFProject.UIUtils.Driver;
 using TAFProject.Utils;
 
@@ -7,8 +8,8 @@ namespace Tests
     [TestFixture]
     class LoginTest : BaseTest
     {
-        string user = "TAT18";
-        string password = "tat18pass";
+     //   string user = "TAT18";
+     //   string password = "tat18pass";
 
         [SetUp]
         public void InitTest()
@@ -27,13 +28,16 @@ namespace Tests
 			Steps.Login(user, password);
             Assert.True(Steps.IsLogIn(user));
 
-	        //var res = TestContext.CurrentContext.Result;
-	        //logger.Log.Info($"Test finished with status: {res}");
+			// var res = TestContext.CurrentContext.Result.Outcome.Status;
+
+			logger.Log.Info($"Test finished with status: {TestContext.CurrentContext.Result.Outcome.Status}");
 		}
 	    [TearDown]
 	    public void CloseTest()
 	    {
-		    browser.Close();
+		    logger.Log.Info($"Test finished with status: {TestExecutionContext.CurrentContext.CurrentResult.ResultState.Status}");
+
+			browser.Close();
 	    }
 	}
 }

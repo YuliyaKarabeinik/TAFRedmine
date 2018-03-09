@@ -19,6 +19,7 @@ namespace TAFProject.Utils
             HomePage homepage = new HomePage();
             if (user == string.Empty)
                 return homepage.IsLogIn();
+
             return homepage.GetCurrentUser() == user;
         }
 

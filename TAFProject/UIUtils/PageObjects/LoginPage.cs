@@ -6,8 +6,8 @@ namespace TAFProject.UIUtils.PageObjects
     public class LoginPage : BasePage
     {
         static readonly By locatorTextboxUser = By.Id("username"),
-            locatorTextboxPassword = By.Id("password"),
-            locatorButtonLogin = By.XPath("//input[@type='submit']");
+						locatorTextboxPassword = By.Id("password"),
+						locatorButtonLogin = By.XPath("//input[@type='submit']");
         BaseElement textboxUser, textboxPassword, buttonLogin;
 
         public LoginPage SetUser(string login)

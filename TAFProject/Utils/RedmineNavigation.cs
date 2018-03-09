@@ -28,7 +28,8 @@ namespace TAFProject.Utils
             { Pages.Issues, $"http:////icerow.com//projects//{CurrentProjectIdentifier}//issues"}
         };
 
-        public static TPage GoTo<TPage>(Pages page, string projectIdentifier = "") where TPage : BasePage, new()//+метод где url 
+        public static TPage GoTo<TPage>(Pages page, string projectIdentifier = "")
+	        where TPage : BasePage, new()//+метод где url 
         {
             browser.GoToUrl($"{urls[page]}/{projectIdentifier}");
             CurrentUrl = urls[page];
