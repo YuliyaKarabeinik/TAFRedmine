@@ -11,27 +11,29 @@ namespace Tests
         string password = "tat18pass";
 
         [SetUp]
-        public void InitialTest()
+        public void InitTest()
         {
-			logger.Log.Info("Test LogIn started");
-            browser.GoToUrl(Configuration.StartUrl);
-            if (Steps.IsLogIn())
+			if (Steps.IsLogIn())
                 Steps.LogOut();
-	        var res = TestContext.CurrentContext.Result;
-	        logger.Log.Info($"Test finished with status: {res}");
-        }
-
-        [TearDown]
-        public void CloseTest()
-        {
-            browser.Close();
-         }
+	        logger.Log.Info("Logout");
+		}
+     
 
         [Test]
         public void CorrectLoginTest()
         {
-            Steps.Login(user, password);
+	       // logger.InitLogger();
+	        logger.Log.Info("Test LogIn started");
+			Steps.Login(user, password);
             Assert.True(Steps.IsLogIn(user));
-        }
-    }
+
+	        //var res = TestContext.CurrentContext.Result;
+	        //logger.Log.Info($"Test finished with status: {res}");
+		}
+	    [TearDown]
+	    public void CloseTest()
+	    {
+		    browser.Close();
+	    }
+	}
 }
