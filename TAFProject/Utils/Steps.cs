@@ -55,7 +55,6 @@ namespace TAFProject.Utils
             Enums.IssueStatus status = Enums.IssueStatus.Default, Enums.IssuePriority priority = Enums.IssuePriority.Default)
         {
             RedmineNavigation.GoTo<AddIssuePage>(Pages.TemplateNewIssue, projectIdentifier);
-			Thread.Sleep(5000);
             var newIssue = new AddIssuePage();
             newIssue.SelectType(type);
             newIssue.SetSubject(issueSubject);
