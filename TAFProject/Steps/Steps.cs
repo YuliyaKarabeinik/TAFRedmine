@@ -70,5 +70,11 @@ namespace TAFProject.Steps
 			ActivityPage page = new ActivityPage();
 			return page.IsIssueCreated("");//name or number of issue?
 		}
-	}
+
+        public static void IssueTable()
+        {
+            IssuePage page = new IssuePage();
+            Issue issue = page.Table[1];
+        }
+    }
 }

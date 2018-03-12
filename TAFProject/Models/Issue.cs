@@ -16,7 +16,7 @@ namespace TAFProject.Models
     }
     public class Issue
     {
-        public int Number { get; set; }
+        //public int Number { get; set; }
         public IssueType Type { get; set; }
         public string Subject { get; set; }
         public string Description { get; set; }
