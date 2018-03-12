@@ -6,13 +6,12 @@ namespace TAFProject.Utils
 {
     public enum Pages
     {
-        Login, Home, Projects, NewProject, CurrentProject, NewIssue, CreatedIssue, Activity, Issues
+        Login, Home, Projects, NewProject, TemplateCurrentProject, TemplateNewIssue, TemplateCreatedIssue, TemplateActivity, TemplateIssues
     }
     static class RedmineNavigation
     {
         static Browser browser = Browser.Instance;
         public static string CurrentUrl { get; private set; }
-        private static string CurrentProjectIdentifier { get; } = "";
         private static int IssueNumber { get; }
 
         static readonly Dictionary<Pages, string> urls = new Dictionary<Pages, string>()
@@ -21,18 +20,18 @@ namespace TAFProject.Utils
             { Pages.Home, "http://icerow.com/"},
             { Pages.Projects, "http://icerow.com/projects/"},
             { Pages.NewProject, "http://icerow.com/projects/new"},
-            { Pages.CurrentProject, $"http:////icerow.com//projects//{CurrentProjectIdentifier}"},
-            { Pages.NewIssue, $"http:////icerow.com//{CurrentProjectIdentifier}//issues//new"},
-            { Pages.CreatedIssue, $"http:////icerow.com//issues//{IssueNumber}"},
-            { Pages.Activity, $"http:////icerow.com//projects//{CurrentProjectIdentifier}//activity"},
-            { Pages.Issues, $"http:////icerow.com//projects//{CurrentProjectIdentifier}//issues"}
+            { Pages.TemplateCurrentProject, "http://icerow.com/projects/{0}"},
+            { Pages.TemplateNewIssue, "http://icerow.com/projects/{0}/issues/new"},
+            { Pages.TemplateCreatedIssue, "http://icerow.com/issues/{0}"},
+            { Pages.TemplateActivity, "http://icerow.com/projects/{0}/activity"},
+            { Pages.TemplateIssues, "http://icerow.com/projects/{0}/issues"}
         };
 
-        public static TPage GoTo<TPage>(Pages page, string projectIdentifier = "")
-	        where TPage : BasePage, new()//+метод где url 
+        public static TPage GoTo<TPage>(Pages page, string projectIdentifier = "") where TPage : BasePage, new()
         {
-            browser.GoToUrl($"{urls[page]}/{projectIdentifier}");
-            CurrentUrl = urls[page];
+            var nextUrl = projectIdentifier == string.Empty ? urls[page] : string.Format(urls[page], projectIdentifier);
+            browser.GoToUrl(nextUrl);
+            CurrentUrl = nextUrl;
             return new TPage();
         }
 

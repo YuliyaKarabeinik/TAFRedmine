@@ -10,9 +10,9 @@ namespace TAFProject.UIUtils.PageObjects
         static readonly By locatorComboboxIssueType = By.XPath("//select[@id='issue_tracker_id']"),
             locatorTextboxSubject = By.XPath("//input[@id='issue_subject']"),
             locatorTextboxDescription = By.XPath("//textarea[@id='issue_description']"),
-            locatorComboboxStatus = By.XPath("//input[@id='project_homepage']"),
-            locatorComboboxPriority = By.XPath("//input[@id='project_is_public']"),
-            locatorButtonCreate = By.XPath("//select[@id='project_parent_id']");
+            locatorComboboxStatus = By.XPath("//select[@id='issue_status_id']"),
+            locatorComboboxPriority = By.XPath("//select[@id='issue_priority_id']"),
+            locatorButtonCreate = By.XPath("//input[@type='submit']");
         SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
         BaseElement textboxSubject, textboxDescription, buttonCreate;
 

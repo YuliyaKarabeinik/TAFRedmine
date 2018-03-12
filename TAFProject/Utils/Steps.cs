@@ -1,4 +1,5 @@
-﻿using TAFProject.Models;
+﻿using System.Threading;
+using TAFProject.Models;
 using TAFProject.UIUtils.PageObjects;
 
 namespace TAFProject.Utils
@@ -54,7 +55,7 @@ namespace TAFProject.Utils
 		public static void AddIssue(string projectIdentifier, string issueSubject, Enums.IssueType type = Enums.IssueType.Default, string issueDescription = "",
             Enums.IssueStatus status = Enums.IssueStatus.Default, Enums.IssuePriority priority = Enums.IssuePriority.Default)
         {
-            RedmineNavigation.GoTo<AddIssuePage>(Pages.NewIssue, projectIdentifier);
+            RedmineNavigation.GoTo<AddIssuePage>(Pages.TemplateNewIssue, projectIdentifier);
             var newIssue = new AddIssuePage();
             newIssue.SelectType(type);
             newIssue.SetSubject(issueSubject);
@@ -63,5 +64,11 @@ namespace TAFProject.Utils
             newIssue.SelectPriority(priority);
             newIssue.ClickCreate();
         }
-    }
+
+		public static bool IsIssueCreated()
+		{
+			ActivityPage page = new ActivityPage();
+			return page.IsIssueCreated("");//name or number of issue?
+		}
+	}
 }

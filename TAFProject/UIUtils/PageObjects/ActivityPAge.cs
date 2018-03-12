@@ -9,7 +9,7 @@ namespace TAFProject.UIUtils.PageObjects
         static readonly By activityContentLocator = By.Id("activity");
         BaseElement activityContent;
 
-        public bool IsIssueAdded(string issueName)
+        public bool IsIssueCreated(string issueName)
         {
             activityContent = SearchElementUtil.GetElement(activityContentLocator);
             return activityContent.FindElements(By.XPath("//dl//a")).Any(element => element.Text == issueName);
