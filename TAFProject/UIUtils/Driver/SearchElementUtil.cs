@@ -17,7 +17,7 @@ namespace TAFProject.UIUtils.Driver
             }
         }
 
-        public static BaseElement GetElement(string xPathLocator)//IWebElement
+        public static IWebElement GetElement(string xPathLocator)
         {
             try
             {

@@ -1,8 +1,8 @@
-﻿using System.Threading;
-using TAFProject.Models;
+﻿using TAFProject.Models;
 using TAFProject.UIUtils.PageObjects;
+using TAFProject.Utils;
 
-namespace TAFProject.Utils
+namespace TAFProject.Steps
 {
     public static class Steps
     {
