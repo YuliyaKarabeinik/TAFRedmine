@@ -22,7 +22,7 @@ namespace TAFProject.Utils
             { Pages.NewProject, "http://icerow.com/projects/new"},
             { Pages.TemplateCurrentProject, "http://icerow.com/projects/{0}"},
             { Pages.TemplateNewIssue, "http://icerow.com/projects/{0}/issues/new"},
-            { Pages.TemplateCreatedIssue, "http://icerow.com/issues/{0}"},
+            { Pages.TemplateCreatedIssue, "http://icerow.com/issues/{0}"},//{0} - номер ишью
             { Pages.TemplateActivity, "http://icerow.com/projects/{0}/activity"},
             { Pages.TemplateIssues, "http://icerow.com/projects/{0}/issues"}
         };

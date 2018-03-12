@@ -4,7 +4,7 @@ using TAFProject.Utils;
 
 namespace TAFProject.Steps
 {
-    public static class Steps
+    public static class LoginSteps
     {
         public static void Login(string login, string password)
         {
@@ -32,8 +32,7 @@ namespace TAFProject.Steps
 
         public static void AddProject(string projectName, string projectIdentifier)
         {
-            RedmineNavigation.GoTo<NewProjectPage>(Pages.NewProject);
-            var newProject = new NewProjectPage();
+            var newProject = RedmineNavigation.GoTo<NewProjectPage>(Pages.NewProject); 
             newProject.SetName(projectName);
             newProject.SetIdentifier(projectIdentifier);
             newProject.ClickCreate();
@@ -55,9 +54,8 @@ namespace TAFProject.Steps
 		public static void AddIssue(string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
             IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
         {
-            RedmineNavigation.GoTo<NewIssuePage>(Pages.TemplateNewIssue, projectIdentifier);
-            var newIssue = new NewIssuePage();
-            newIssue.SelectType(type);
+            var newIssue = RedmineNavigation.GoTo<NewIssuePage>(Pages.TemplateNewIssue, projectIdentifier);
+			newIssue.SelectType(type);
             newIssue.SetSubject(issueSubject);
             newIssue.SetDescription(issueDescription);
             newIssue.SelectStatus(status);

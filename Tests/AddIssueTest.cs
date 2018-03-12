@@ -11,22 +11,24 @@ namespace Tests
 		public void LogIn()
 		{
 			browser.GoToUrl(Configuration.StartUrl);
-			Steps.Login(user.UserName, user.Password);
+			LoginSteps.Login(user.UserName, user.Password);
 		}
 
-		[TearDown]
-		public void CloseTest()
-		{
-			browser.Close();
-			//Logging.Log.Info($"Test Login: {TestStatus}");
-		}
+		
 		static string projectIdentifier = "cs3m5cs3m";
 		static string issueSubject = "subject".GetRandomString(5);
 
 		[Test]
 		public void AddIssuePositiveTest()
 		{
-			Steps.AddIssue(projectIdentifier, issueSubject);
+			LoginSteps.AddIssue(projectIdentifier, issueSubject);
 		}
+
+	    [TearDown]
+	    public void CloseTest()
+	    {
+		    browser.Close();
+		    //Logging.Log.Info($"Test Login: {TestStatus}");
+	    }
 	}
 }

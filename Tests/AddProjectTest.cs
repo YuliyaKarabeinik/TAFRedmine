@@ -17,29 +17,29 @@ namespace Tests
         public void LogIn()
         {
             browser.GoToUrl(Configuration.StartUrl);
-            Steps.Login(user.UserName, user.Password);
+            LoginSteps.Login(user.UserName, user.Password);
         }
 
         [Test]
         public void AddProjectPositiveTest()
         {
-	     	logger.Log.Info($"Test AddProject started with parameters:\n project name: {projectName}, identifier {projectIdentifier}");
-			Steps.AddProject(projectName, projectIdentifier);
-	    	Assert.IsTrue(Steps.IsProjectCreated());
+	     	logger.Info($"Test AddProject started with parameters:\n project name: {projectName}, identifier {projectIdentifier}");
+			LoginSteps.AddProject(projectName, projectIdentifier);
+	    	Assert.IsTrue(LoginSteps.IsProjectCreated());
 		}
 
 		[Test]
         public void AddProjectNegativeTest()
         {
-	        logger.Log.Info($"Test AddProject started with parameters:\n project name: {projectName}, identifier {projectIdentifier}");
-			Steps.AddProject(projectName, incorrectIdentifier);
-            Assert.IsFalse(Steps.IsProjectCreated());
+	        logger.Info($"Test AddProject started with parameters:\n project name: {projectName}, identifier {projectIdentifier}");
+			LoginSteps.AddProject(projectName, incorrectIdentifier);
+            Assert.IsFalse(LoginSteps.IsProjectCreated());
         }
 
 	    [TearDown]
 	    public void CloseTest()
 	    {
-		    logger.Log.Info($"Test finished with status: {TestContext.CurrentContext.Result.Outcome}");
+		    logger.Info($"Test finished with status: {TestContext.CurrentContext.Result.Outcome}");
 			browser.Close();
 	    }
 	}

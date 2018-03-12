@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using TAFProject.Models;
 using TAFProject.UIUtils.Driver;
 using TAFProject.Utils;
@@ -9,7 +10,7 @@ namespace Tests
     {
         protected static Browser browser = Browser.Instance;
         //protected static Logger logger = Logger.Instance;
-        protected Logger logger = new Logger();
+        protected ILogger logger = new Logger();
         protected User user = new User();
 
         [OneTimeSetUp]
@@ -19,18 +20,28 @@ namespace Tests
             user.UserName = Configuration.User;
             user.Password = Configuration.Password;
             logger.InitLogger();
-            logger.Log.Info("Settings: " +
+            logger.Info("Settings: " +
                                  $"\nCurrent browser: {Configuration.Browser}" +
                                  $"\nStart Url: {Configuration.StartUrl}" +
                                  $"\nTimeout: {Configuration.ElementTimeout}");
             browser.WindowMaximise();
         }
 
-        [OneTimeTearDown]
+	    //[SetUp]
+	    //public void SetUp()
+	    //{
+		   // var browser1 = new ChromeDriver();
+		   // BrowserDictionary.browsers.TryAdd(TestContext.CurrentContext.Test.Name, browser1);
+		   // BrowserDictionary.browsers.TryGetValue(TestContext.CurrentContext.Test.Name, out driver);
+
+	    //}
+
+	    [OneTimeTearDown]
         public void CleanTest()
         {
             browser.Quit();
-            logger.Log.Info("Exit from browser");
+            logger.Info("Exit from browser");
         }
+		//[AttributeUsage(AttributeTargets.Method)]
     }
 }

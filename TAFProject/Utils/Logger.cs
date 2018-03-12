@@ -13,6 +13,10 @@ namespace TAFProject.Utils
 		{
 			XmlConfigurator.Configure();
 		}
+		public void Info(string information)
+		{
+			Log.Info(information);
+		}
 	}
 }
 
