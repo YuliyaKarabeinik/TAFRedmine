@@ -24,16 +24,16 @@ namespace Tests
         public void AddProjectPositiveTest()
         {
 	     	logger.Info($"Test AddProject started with parameters:\n project name: {projectName}, identifier {projectIdentifier}");
-			LoginSteps.AddProject(projectName, projectIdentifier);
-	    	Assert.IsTrue(LoginSteps.IsProjectCreated());
+			ProjectSteps.AddProject(projectName, projectIdentifier);
+	    	Assert.IsTrue(ProjectSteps.IsProjectCreated());
 		}
 
 		[Test]
         public void AddProjectNegativeTest()
         {
 	        logger.Info($"Test AddProject started with parameters:\n project name: {projectName}, identifier {projectIdentifier}");
-			LoginSteps.AddProject(projectName, incorrectIdentifier);
-            Assert.IsFalse(LoginSteps.IsProjectCreated());
+	        ProjectSteps.AddProject(projectName, incorrectIdentifier);
+            Assert.IsFalse(ProjectSteps.IsProjectCreated());
         }
 
 	    [TearDown]

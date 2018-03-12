@@ -21,7 +21,7 @@ namespace Tests
 		[Test]
 		public void AddIssuePositiveTest()
 		{
-			LoginSteps.AddIssue(projectIdentifier, issueSubject);
+			IssueSteps.AddIssue(projectIdentifier, issueSubject);
 		}
 
 	    [TearDown]

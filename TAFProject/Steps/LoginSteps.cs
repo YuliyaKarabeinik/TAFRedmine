@@ -29,50 +29,6 @@ namespace TAFProject.Steps
             HomePage homepage = new HomePage();
             homepage.LogoutHomePage();
         }
-
-        public static void AddProject(string projectName, string projectIdentifier)
-        {
-            var newProject = RedmineNavigation.GoTo<NewProjectPage>(Pages.NewProject); 
-            newProject.SetName(projectName);
-            newProject.SetIdentifier(projectIdentifier);
-            newProject.ClickCreate();
-        }
-
-        public static bool IsProjectCreated()
-        {
-            NewProjectPage page = new NewProjectPage();
-            return page.IsSuccessfulCreation();
-        }
-
-	    public static bool IsProjectCreated(out string notificationText)
-	    {
-		    NewProjectPage page = new NewProjectPage();
-		    notificationText = page.GetNotificationAboutCreationText();
-		    return page.IsSuccessfulCreation();
-	    }
-
-		public static void AddIssue(string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
-            IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
-        {
-            var newIssue = RedmineNavigation.GoTo<NewIssuePage>(Pages.TemplateNewIssue, projectIdentifier);
-			newIssue.SelectType(type);
-            newIssue.SetSubject(issueSubject);
-            newIssue.SetDescription(issueDescription);
-            newIssue.SelectStatus(status);
-            newIssue.SelectPriority(priority);
-            newIssue.ClickCreate();
-        }
-
-		public static bool IsIssueCreated()
-		{
-			ActivityPage page = new ActivityPage();
-			return page.IsIssueCreated("");//name or number of issue?
-		}
-
-        public static void IssueTable()
-        {
-            IssuePage page = new IssuePage();
-            Issue issue = page.Table[1];
-        }
+		
     }
 }
