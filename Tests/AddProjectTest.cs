@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Internal;
 using TAFProject.UIUtils.Driver;
 using TAFProject.Utils;
 
@@ -14,7 +13,13 @@ namespace Tests
 	    private static string projectIdentifier = "ident".GetRandomString(5);
         static string incorrectIdentifier = "";
 
-   
+        [SetUp]
+        public void LogIn()
+        {
+            browser.GoToUrl(Configuration.StartUrl);
+            Steps.Login(user.UserName, user.Password);
+        }
+
         [Test]
         public void AddProjectPositiveTest()
         {

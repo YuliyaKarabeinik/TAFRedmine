@@ -68,7 +68,6 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIUtils\Driver\BaseElement.cs" />
-    <Compile Include="UIUtils\Driver\BaseTest.cs" />
     <Compile Include="UIUtils\Driver\Browser.cs" />
     <Compile Include="UIUtils\Driver\BrowserFactory.cs" />
     <Compile Include="UIUtils\Driver\SearchElementUtil.cs" />

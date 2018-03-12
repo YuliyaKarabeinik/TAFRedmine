@@ -16,10 +16,10 @@ namespace TAFProject.UIUtils.PageObjects
         SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
         BaseElement textboxSubject, textboxDescription, buttonCreate;
 
-        public AddIssuePage SelectType(Enums.IssueType type)
+        public AddIssuePage SelectType(IssueType type)
         {
             comboboxIssueType = new SelectElement(SearchElementUtil.GetElement(locatorComboboxIssueType));
-            if (type != Enums.IssueType.Default)
+            if (type != IssueType.Default)
                 comboboxIssueType.SelectByText(type.ToString().Replace(" ", ""));
             return this;
         }
@@ -35,17 +35,17 @@ namespace TAFProject.UIUtils.PageObjects
             textboxDescription.SendKeys(issueDescription);
             return this;
         }
-        public AddIssuePage SelectStatus(Enums.IssueStatus status)
+        public AddIssuePage SelectStatus(IssueStatus status)
         {
             comboboxStatus = new SelectElement(SearchElementUtil.GetElement(locatorComboboxStatus));
-            if (status != Enums.IssueStatus.Default)
+            if (status != IssueStatus.Default)
                 comboboxStatus.SelectByText(status.ToString().Replace(" ", ""));
             return this;
         }
-        public AddIssuePage SelectPriority(Enums.IssuePriority priority)
+        public AddIssuePage SelectPriority(IssuePriority priority)
         {
             comboboxPriority = new SelectElement(SearchElementUtil.GetElement(locatorComboboxPriority));
-            if (priority != Enums.IssuePriority.Default)
+            if (priority != IssuePriority.Default)
                 comboboxPriority.SelectByText(priority.ToString());
             return this;
         }

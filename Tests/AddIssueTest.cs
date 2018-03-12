@@ -7,14 +7,11 @@ namespace Tests
     [TestFixture]
     class AddIssueTest : BaseTest
     {
-		string login = "TAT18";
-		string password = "tat18pass";
-
 		[SetUp]
 		public void LogIn()
 		{
 			browser.GoToUrl(Configuration.StartUrl);
-			Steps.Login(login, password);
+			Steps.Login(user.UserName, user.Password);
 		}
 
 		[TearDown]
@@ -24,7 +21,7 @@ namespace Tests
 			//Logging.Log.Info($"Test Login: {TestStatus}");
 		}
 		static string projectIdentifier = "cs3m5cs3m";
-		static string issueSubject = RandomGenerator.GetRandomString(5);
+		static string issueSubject = "subject".GetRandomString(5);
 
 		[Test]
 		public void AddIssuePositiveTest()

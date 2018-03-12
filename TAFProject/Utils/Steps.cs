@@ -52,8 +52,8 @@ namespace TAFProject.Utils
 		    return page.IsSuccessfulCreation();
 	    }
 
-		public static void AddIssue(string projectIdentifier, string issueSubject, Enums.IssueType type = Enums.IssueType.Default, string issueDescription = "",
-            Enums.IssueStatus status = Enums.IssueStatus.Default, Enums.IssuePriority priority = Enums.IssuePriority.Default)
+		public static void AddIssue(string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
+            IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
         {
             RedmineNavigation.GoTo<AddIssuePage>(Pages.TemplateNewIssue, projectIdentifier);
             var newIssue = new AddIssuePage();

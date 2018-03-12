@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AddIssueTest.cs" />
     <Compile Include="AddProjectTest.cs" />
+    <Compile Include="BaseTest.cs" />
     <Compile Include="IssuesTableTest.cs" />
     <Compile Include="LoginTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

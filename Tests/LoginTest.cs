@@ -20,9 +20,9 @@ namespace Tests
         [Test]
         public void CorrectLoginTest()
         {
-			logger.Log.Info($"Test LogIn started with parameters:\n login: {user}, password {password}");
-			Steps.Login(user, password);
-            Assert.True(Steps.IsLogIn(user));
+			logger.Log.Info($"Test LogIn started with parameters:\n login: {user.UserName}, password {user.Password}");
+			Steps.Login(user.UserName, user.Password);
+            Assert.True(Steps.IsLogIn(user.UserName));
 		}
 	    [TearDown]
 	    public void CloseTest()
