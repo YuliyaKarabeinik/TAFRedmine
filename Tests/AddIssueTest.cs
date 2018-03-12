@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+using NUnit.Framework;
 using TAFProject.Steps;
 using TAFProject.Utils;
 
@@ -22,9 +23,10 @@ namespace Tests
 		public void AddIssuePositiveTest()
 		{
 			IssueSteps.AddIssue(projectIdentifier, issueSubject);
+			Assert.IsTrue(IssueSteps.IsIssueCreated(projectIdentifier,issueSubject));
 		}
 
-	    [TearDown]
+		[TearDown]
 	    public void CloseTest()
 	    {
 		    browser.Close();

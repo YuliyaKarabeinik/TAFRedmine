@@ -23,10 +23,11 @@ namespace TAFProject.Steps
 			newIssue.ClickCreate();
 		}
 
-		public static bool IsIssueCreated()
+		public static bool IsIssueCreated(string projectIdentifier, string issueName)
 		{
-			ActivityPage page = new ActivityPage();
-			return page.IsIssueCreated("");//name or number of issue?
+			var activity = RedmineNavigation.GoTo<ActivityPage>(Pages.TemplateActivity, projectIdentifier);
+		//	ActivityPage page = new ActivityPage();
+			return activity.IsIssueCreated(issueName); //name or number of issue?
 		}
 	}
 }

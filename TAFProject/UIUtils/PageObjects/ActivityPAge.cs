@@ -12,7 +12,7 @@ namespace TAFProject.UIUtils.PageObjects
         public bool IsIssueCreated(string issueName)
         {
             activityContent = SearchElementUtil.GetElement(activityContentLocator);
-            return activityContent.FindElements(By.XPath("//dl//a")).Any(element => element.Text == issueName);
+			return activityContent.FindElements(By.XPath("//dt//a")).Any(element => element.Text.Contains(issueName));
         }
     }
 }
