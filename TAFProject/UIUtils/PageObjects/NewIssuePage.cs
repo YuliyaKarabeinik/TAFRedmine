@@ -5,7 +5,7 @@ using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
-    public class AddIssuePage : BasePage
+    public class NewIssuePage : BasePage
     {
         static readonly By locatorComboboxIssueType = By.XPath("//select[@id='issue_tracker_id']"),
             locatorTextboxSubject = By.XPath("//input[@id='issue_subject']"),
@@ -16,33 +16,33 @@ namespace TAFProject.UIUtils.PageObjects
         SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
         BaseElement textboxSubject, textboxDescription, buttonCreate;
 
-        public AddIssuePage SelectType(IssueType type)
+        public NewIssuePage SelectType(IssueType type)
         {
             comboboxIssueType = new SelectElement(SearchElementUtil.GetElement(locatorComboboxIssueType));
             if (type != IssueType.Default)
                 comboboxIssueType.SelectByText(type.ToString().Replace(" ", ""));
             return this;
         }
-        public AddIssuePage SetSubject(string issueSubject)
+        public NewIssuePage SetSubject(string issueSubject)
         {
             textboxSubject = SearchElementUtil.GetElement(locatorTextboxSubject);
             textboxSubject.SendKeys(issueSubject);
             return this;
         }
-        public AddIssuePage SetDescription(string issueDescription)
+        public NewIssuePage SetDescription(string issueDescription)
         {
             textboxDescription = SearchElementUtil.GetElement(locatorTextboxDescription);
             textboxDescription.SendKeys(issueDescription);
             return this;
         }
-        public AddIssuePage SelectStatus(IssueStatus status)
+        public NewIssuePage SelectStatus(IssueStatus status)
         {
             comboboxStatus = new SelectElement(SearchElementUtil.GetElement(locatorComboboxStatus));
             if (status != IssueStatus.Default)
                 comboboxStatus.SelectByText(status.ToString().Replace(" ", ""));
             return this;
         }
-        public AddIssuePage SelectPriority(IssuePriority priority)
+        public NewIssuePage SelectPriority(IssuePriority priority)
         {
             comboboxPriority = new SelectElement(SearchElementUtil.GetElement(locatorComboboxPriority));
             if (priority != IssuePriority.Default)

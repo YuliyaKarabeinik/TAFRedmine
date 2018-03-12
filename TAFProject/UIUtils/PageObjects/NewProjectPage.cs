@@ -4,7 +4,7 @@ using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
-    public class AddProjectPage : BasePage
+    public class NewProjectPage : BasePage
     {
         static readonly By locatorTextboxProjectName = By.XPath("//input[@id='project_name']"),
             locatorTextboxProjectDescription = By.XPath("//textarea[@id='project_description']"),
@@ -22,19 +22,19 @@ namespace TAFProject.UIUtils.PageObjects
 
         BaseElement notificationAboutCreation;
 
-        public AddProjectPage SetName(string projectName)
+        public NewProjectPage SetName(string projectName)
         {
             textboxProjectName = SearchElementUtil.GetElement(locatorTextboxProjectName);
             textboxProjectName.SendKeys(projectName);
             return this;
         }
-        public AddProjectPage SetDescription(string projectDescription)
+        public NewProjectPage SetDescription(string projectDescription)
         {
             textboxProjectDescription = SearchElementUtil.GetElement(locatorTextboxProjectDescription);
             textboxProjectDescription.SendKeys(projectDescription);
             return this;
         }
-        public AddProjectPage SetIdentifier(string projectIdentifier)
+        public NewProjectPage SetIdentifier(string projectIdentifier)
         {
             textboxProjectIdentifier = SearchElementUtil.GetElement(locatorTextboxProjectIdentifier);
             textboxProjectIdentifier.Clear();
@@ -42,14 +42,14 @@ namespace TAFProject.UIUtils.PageObjects
             return this;
         }
 
-        public AddProjectPage SetHomepage(string homepage)
+        public NewProjectPage SetHomepage(string homepage)
         {
             textboxHomepage = SearchElementUtil.GetElement(locatorTextboxHomepage);
             textboxHomepage.SendKeys(homepage);
             return this;
         }
 
-        public AddProjectPage SelectPublic(bool tickParam = true)
+        public NewProjectPage SelectPublic(bool tickParam = true)
         {
             checkboxPublic = SearchElementUtil.GetElement(locatorCheckboxPublic);
             if (tickParam)
@@ -59,7 +59,7 @@ namespace TAFProject.UIUtils.PageObjects
             return this;
         }
 
-        public AddProjectPage SelectInheritMembers(bool tickParam = true)
+        public NewProjectPage SelectInheritMembers(bool tickParam = true)
         {
             checkboxInheritMembers = SearchElementUtil.GetElement(locatorCheckboxInheritMembers);
             if (tickParam)
@@ -69,7 +69,7 @@ namespace TAFProject.UIUtils.PageObjects
             return this;
         }
 
-        public AddProjectPage ClickCreate()
+        public NewProjectPage ClickCreate()
         {
             buttonCreate = SearchElementUtil.GetElement(locatorButtonCreate);
             buttonCreate.Click();

@@ -32,8 +32,8 @@ namespace TAFProject.Steps
 
         public static void AddProject(string projectName, string projectIdentifier)
         {
-            RedmineNavigation.GoTo<AddProjectPage>(Pages.NewProject);
-            var newProject = new AddProjectPage();
+            RedmineNavigation.GoTo<NewProjectPage>(Pages.NewProject);
+            var newProject = new NewProjectPage();
             newProject.SetName(projectName);
             newProject.SetIdentifier(projectIdentifier);
             newProject.ClickCreate();
@@ -41,13 +41,13 @@ namespace TAFProject.Steps
 
         public static bool IsProjectCreated()
         {
-            AddProjectPage page = new AddProjectPage();
+            NewProjectPage page = new NewProjectPage();
             return page.IsSuccessfulCreation();
         }
 
 	    public static bool IsProjectCreated(out string notificationText)
 	    {
-		    AddProjectPage page = new AddProjectPage();
+		    NewProjectPage page = new NewProjectPage();
 		    notificationText = page.GetNotificationAboutCreationText();
 		    return page.IsSuccessfulCreation();
 	    }
@@ -55,8 +55,8 @@ namespace TAFProject.Steps
 		public static void AddIssue(string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
             IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
         {
-            RedmineNavigation.GoTo<AddIssuePage>(Pages.TemplateNewIssue, projectIdentifier);
-            var newIssue = new AddIssuePage();
+            RedmineNavigation.GoTo<NewIssuePage>(Pages.TemplateNewIssue, projectIdentifier);
+            var newIssue = new NewIssuePage();
             newIssue.SelectType(type);
             newIssue.SetSubject(issueSubject);
             newIssue.SetDescription(issueDescription);

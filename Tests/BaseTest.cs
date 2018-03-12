@@ -1,9 +1,9 @@
-﻿using log4net;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using TAFProject.Models;
+using TAFProject.UIUtils.Driver;
 using TAFProject.Utils;
 
-namespace TAFProject.UIUtils.Driver
+namespace Tests
 {
     public class BaseTest
     {

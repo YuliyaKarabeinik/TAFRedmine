@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using NUnit.Framework.Internal;
-using TAFProject.UIUtils.Driver;
-using TAFProject.Utils;
+using TAFProject.Steps;
 
 namespace Tests
 {

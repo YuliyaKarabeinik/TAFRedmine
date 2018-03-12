@@ -72,19 +72,20 @@
     <Compile Include="UIUtils\Driver\BrowserFactory.cs" />
     <Compile Include="UIUtils\Driver\SearchElementUtil.cs" />
     <Compile Include="UIUtils\PageObjects\ActivityPage.cs" />
-    <Compile Include="UIUtils\PageObjects\AddIssuePage.cs" />
-    <Compile Include="UIUtils\PageObjects\AddProjectPage.cs" />
+    <Compile Include="UIUtils\PageObjects\IssuePage.cs" />
+    <Compile Include="UIUtils\PageObjects\NewIssuePage.cs" />
+    <Compile Include="UIUtils\PageObjects\NewProjectPage.cs" />
     <Compile Include="UIUtils\PageObjects\BasePage.cs" />
     <Compile Include="UIUtils\PageObjects\CreatedIssuePage.cs" />
     <Compile Include="UIUtils\PageObjects\HomePage.cs" />
-    <Compile Include="UIUtils\PageObjects\IssueTableElement.cs" />
+    <Compile Include="UIUtils\PageObjects\IssueTable.cs" />
     <Compile Include="UIUtils\PageObjects\LoginPage.cs" />
     <Compile Include="Utils\Configuration.cs" />
     <Compile Include="Utils\ILogger.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\RedmineNavigation.cs" />
     <Compile Include="Utils\RandomGenerator.cs" />
-    <Compile Include="Utils\Steps.cs" />
+    <Compile Include="Steps\Steps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
