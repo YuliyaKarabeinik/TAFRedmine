@@ -4,16 +4,16 @@ namespace TAFProject.UIUtils.Driver
 {
 	public class BrowserFactory
 	{
-		public static IBrowser GetBrowser(Enums.BrowserType type, int timeOutSec)
+		public static IBrowser GetBrowser(BrowserType type, int timeOutSec)
 		{
 			switch (type)
 			{
-				case Enums.BrowserType.Chrome:
+				case BrowserType.Chrome:
 					return new Chrome(timeOutSec);
-				case Enums.BrowserType.Firefox:
+				case BrowserType.Firefox:
 					return new Firefox(timeOutSec);
 				default:
-					goto case Enums.BrowserType.Chrome;
+					goto case BrowserType.Chrome;
 			}
 		}
 	}

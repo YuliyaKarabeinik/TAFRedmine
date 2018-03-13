@@ -23,6 +23,7 @@ namespace TAFProject.UIUtils.Driver
         {
 			return GetElement(driver, By.XPath(xPathLocator));
 		}
+
 		public static IWebElement WaitElement(IWebDriver driver, By locator, int timeoutsec)
 		{
 			new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutsec)).Until(driv => driv.FindElement(locator));

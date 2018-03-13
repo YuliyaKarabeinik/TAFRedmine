@@ -7,16 +7,15 @@ namespace TAFProject.Steps
 {
 	public static class IssueSteps
 	{
-		public static void AddIssue(IBrowser browser, string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
-			IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
+		public static void AddIssue(IBrowser browser, string projectIdentifier, Issue issue)
 		{
 			var newIssue = RedmineNavigation.GoTo<NewIssuePage>(browser, Pages.TemplateNewIssue, projectIdentifier);
 			newIssue.driver = browser.Driver;////Navigation problems
-			newIssue.SelectType(type);
-			newIssue.SetSubject(issueSubject);
-			newIssue.SetDescription(issueDescription);
-			newIssue.SelectStatus(status);
-			newIssue.SelectPriority(priority);
+			newIssue.SelectType(issue.Type);
+			newIssue.SetSubject(issue.Subject);
+			//newIssue.SetDescription(issue.Description);
+			newIssue.SelectStatus(issue.Status);
+			newIssue.SelectPriority(issue.Priority);
 			newIssue.ClickCreate();
 		}
 

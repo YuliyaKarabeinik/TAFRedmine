@@ -14,7 +14,7 @@ namespace TAFProject.UIUtils.PageObjects
             locatorComboboxPriority = By.XPath("//select[@id='issue_priority_id']"),
             locatorButtonCreate = By.XPath("//input[@type='submit']");
         SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
-        BaseElement textboxSubject, textboxDescription, buttonCreate;
+        IWebElement textboxSubject, textboxDescription, buttonCreate;
 
 		public NewIssuePage()
 		{
@@ -31,13 +31,13 @@ namespace TAFProject.UIUtils.PageObjects
         }
         public NewIssuePage SetSubject(string issueSubject)
         {
-            textboxSubject = (BaseElement)SearchElementUtil.GetElement(driver, locatorTextboxSubject);
+            textboxSubject = SearchElementUtil.GetElement(driver, locatorTextboxSubject);
             textboxSubject.SendKeys(issueSubject);
             return this;
         }
         public NewIssuePage SetDescription(string issueDescription)
         {
-            textboxDescription = (BaseElement)SearchElementUtil.GetElement(driver, locatorTextboxDescription);
+            textboxDescription = SearchElementUtil.GetElement(driver, locatorTextboxDescription);
             textboxDescription.SendKeys(issueDescription);
             return this;
         }
@@ -57,7 +57,7 @@ namespace TAFProject.UIUtils.PageObjects
         }
         public CreatedIssuePage ClickCreate()
         {
-            buttonCreate = (BaseElement)SearchElementUtil.GetElement(driver, locatorButtonCreate);
+            buttonCreate = SearchElementUtil.GetElement(driver, locatorButtonCreate);
             buttonCreate.Click();
             return new CreatedIssuePage(driver);
         }

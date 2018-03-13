@@ -5,7 +5,7 @@ namespace TAFProject.UIUtils.PageObjects
 {
     public abstract class BasePage
     {
-		private int timeout = 10;
+		private int timeout = 10;//default
         public IWebDriver driver { get; set; }
 		public BasePage() { }
 

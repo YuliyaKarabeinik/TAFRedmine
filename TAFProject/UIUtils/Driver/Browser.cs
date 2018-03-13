@@ -8,7 +8,7 @@ namespace TAFProject.UIUtils.Driver
         public int ImpWait { get; }
         public IWebDriver Driver { get; private set; }
 
-        public Browser(IWebDriver driver, int timeout, Enums.BrowserType type)
+        public Browser(IWebDriver driver, int timeout, BrowserType type)
         {
 			Driver = driver;
             Driver = DriverFactory.GetDriver(type, timeout);

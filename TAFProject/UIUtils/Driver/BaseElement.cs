@@ -43,7 +43,8 @@ namespace TAFProject.UIUtils.Driver
         public void SendKeys(string text)
         {
 			SearchElementUtil.WaitElement(driver, locator, timeoutsec);
-			element.SendKeys(text);
+            if (text!=string.Empty)
+                element.SendKeys(text);
         }
 
         public void Click()

@@ -14,7 +14,7 @@ namespace TAFProject.Utils
 	    private const string KeyPassword = "password";
 
 		private static readonly int defaultTimeout = 10;
-        private static readonly Enums.BrowserType defaultBrowser = Enums.BrowserType.Chrome;
+        private static readonly BrowserType defaultBrowser = BrowserType.Chrome;
         private static readonly string defaultStartUrl = "http://icerow.com/";
 	    private static readonly string defaultUser = "TAT18";
 	    private static readonly string defaultPassword = "tat18pass";
@@ -31,11 +31,11 @@ namespace TAFProject.Utils
             }
         }
 
-        public static Enums.BrowserType Browser
+        public static BrowserType Browser
         {
             get
             {
-				Enums.BrowserType browserTypeFromConfig;
+				BrowserType browserTypeFromConfig;
 
 				if (Enum.TryParse(GetConfigSettings(KeyBrowser, defaultBrowser.ToString()),
                     out browserTypeFromConfig))

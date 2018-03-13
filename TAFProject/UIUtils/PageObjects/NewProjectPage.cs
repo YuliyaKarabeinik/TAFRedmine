@@ -17,9 +17,9 @@ namespace TAFProject.UIUtils.PageObjects
             locatorPositiveNotification = By.XPath("//*[@id='flash_notice']"),
             locatorNegativeNotification = By.XPath("//*[@id='errorExplanation']");
 
-        BaseElement textboxProjectName, textboxProjectDescription, textboxProjectIdentifier, textboxHomepage,
+        IWebElement textboxProjectName, textboxProjectDescription, textboxProjectIdentifier, textboxHomepage,
             checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
-		BaseElement notificationAboutCreation;
+        IWebElement notificationAboutCreation;
 
 		public NewProjectPage()
 		{
@@ -41,7 +41,7 @@ namespace TAFProject.UIUtils.PageObjects
         }
         public NewProjectPage SetIdentifier(string projectIdentifier)
         {
-            textboxProjectIdentifier = (BaseElement)SearchElementUtil.GetElement(driver, locatorTextboxProjectIdentifier);
+            textboxProjectIdentifier = SearchElementUtil.GetElement(driver, locatorTextboxProjectIdentifier);
             textboxProjectIdentifier.Clear();
             textboxProjectIdentifier.SendKeys(projectIdentifier);
             return this;
@@ -49,28 +49,28 @@ namespace TAFProject.UIUtils.PageObjects
 
         public NewProjectPage SetHomepage(string homepage)
         {
-            textboxHomepage = (BaseElement)SearchElementUtil.GetElement(driver, locatorTextboxHomepage);
+            textboxHomepage = SearchElementUtil.GetElement(driver, locatorTextboxHomepage);
             textboxHomepage.SendKeys(homepage);
             return this;
         }
 
         public NewProjectPage SelectPublic(bool tickParam = true)
         {
-            checkboxPublic = (BaseElement)SearchElementUtil.GetElement(driver, locatorCheckboxPublic);
+            checkboxPublic = SearchElementUtil.GetElement(driver, locatorCheckboxPublic);
             if (tickParam)
-                checkboxPublic.Check();
+                ((BaseElement)checkboxPublic).Check();
             else
-                checkboxPublic.Uncheck();
+                ((BaseElement)checkboxPublic).Uncheck();
             return this;
         }
 
         public NewProjectPage SelectInheritMembers(bool tickParam = true)
         {
-            checkboxInheritMembers = (BaseElement)SearchElementUtil.GetElement(driver, locatorCheckboxInheritMembers);
+            checkboxInheritMembers = SearchElementUtil.GetElement(driver, locatorCheckboxInheritMembers);
             if (tickParam)
-                checkboxInheritMembers.Check();
+                ((BaseElement)checkboxInheritMembers).Check();
             else
-                checkboxInheritMembers.Uncheck();
+                ((BaseElement)checkboxInheritMembers).Uncheck();
             return this;
         }
 
@@ -96,12 +96,12 @@ namespace TAFProject.UIUtils.PageObjects
         }
 
 	    //where should use??
-		public Enums.Notifications GetCreationResult()
+		public Notifications GetCreationResult()
 	    {
 		    if (IsSuccessfulCreation())
-			    return Enums.Notifications.Positive;
+			    return Notifications.Positive;
 		    notificationAboutCreation = (BaseElement)SearchElementUtil.GetElement(driver, locatorNegativeNotification);
-		    return Enums.Notifications.Negative;
+		    return Notifications.Negative;
 	    }
 
 	}

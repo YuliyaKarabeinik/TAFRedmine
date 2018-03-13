@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using System.Collections.Generic;
+using System.Linq;
 using TAFProject.Models;
 
 namespace TAFProject.UIUtils.PageObjects
@@ -51,10 +52,9 @@ namespace TAFProject.UIUtils.PageObjects
         public List<string> GetListOf(Columns column)
         {
             List<string> list = new List<string>();
-            foreach (IWebElement subjectElement in tableElement.FindElements(By.XPath($"//tbody//td[@class='{column.ToString().ToLower()}']")))//LINQ   //для # подходит??
-            {
-                list.Add(subjectElement.Text);
-            }
+            list.AddRange((ICollection<string>) tableElement
+                .FindElements(By.XPath($"//tbody//td[@class='{column.ToString().ToLower()}']"))
+                .Select(element => element.Text));
             return list;
         }
 

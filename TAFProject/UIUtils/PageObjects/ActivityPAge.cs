@@ -14,7 +14,7 @@ namespace TAFProject.UIUtils.PageObjects
 
         public bool IsIssueCreated(IWebDriver driver, string issueName)
         {
-            activityContent = (BaseElement) SearchElementUtil.GetElement(driver, activityContentLocator);
+            activityContent = SearchElementUtil.GetElement(driver, activityContentLocator);
 			return activityContent.FindElements(By.XPath("//dt//a")).Any(element => element.Text.Contains(issueName));
         }
     }
