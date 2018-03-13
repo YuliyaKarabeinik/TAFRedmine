@@ -1,10 +1,12 @@
 ﻿using NUnit.Framework;
+using TAFProject.Models;
 using TAFProject.Steps;
+using TAFProject.UIUtils.Driver;
 using TAFProject.Utils;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestFixture, Parallelizable(ParallelScope.All)]
     class AddProjectTest : BaseTest
     {
 
@@ -16,24 +18,25 @@ namespace Tests
         [SetUp]
         public void LogIn()
         {
-            browser.GoToUrl(Configuration.StartUrl);
-            LoginSteps.Login(user.UserName, user.Password);
+			browser = BrowserFactory.GetBrowser(Enums.BrowserType.Chrome, Configuration.ElementTimeout);
+			browser.GoToUrl(Configuration.StartUrl);
+            LoginSteps.Login(browser, user.UserName, user.Password);//было, что 2 логина записали в 1 браузер. Как избежать?
         }
 
-        [Test]
-        public void AddProjectPositiveTest()
+		[Test]
+		public void AddProjectPositiveTest()
         {
 	     	logger.Info($"Test AddProject started with parameters:\n project name: {projectName}, identifier {projectIdentifier}");
-			ProjectSteps.AddProject(projectName, projectIdentifier);
-	    	Assert.IsTrue(ProjectSteps.IsProjectCreated());
+			ProjectSteps.AddProject(browser, projectName, projectIdentifier);
+	    	Assert.IsTrue(ProjectSteps.IsProjectCreated(browser));
 		}
 
 		[Test]
-        public void AddProjectNegativeTest()
+		public void AddProjectNegativeTest()
         {
 	        logger.Info($"Test AddProject started with parameters:\n project name: {projectName}, identifier {projectIdentifier}");
-	        ProjectSteps.AddProject(projectName, incorrectIdentifier);
-            Assert.IsFalse(ProjectSteps.IsProjectCreated());
+	        ProjectSteps.AddProject(browser, projectName, incorrectIdentifier);
+            Assert.IsFalse(ProjectSteps.IsProjectCreated(browser));
         }
 
 	    [TearDown]

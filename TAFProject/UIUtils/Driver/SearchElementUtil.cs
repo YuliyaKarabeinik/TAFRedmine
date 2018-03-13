@@ -1,14 +1,16 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace TAFProject.UIUtils.Driver
 {
     class SearchElementUtil
     {
-        public static BaseElement GetElement(By locator)
+        public static IWebElement GetElement(IWebDriver driver, By locator)
         {
             try
             {
-                BaseElement element = new BaseElement(locator);
+				IWebElement element = new BaseElement(driver, locator);
                 return element;
             }
             catch (NoSuchElementException)
@@ -17,24 +19,16 @@ namespace TAFProject.UIUtils.Driver
             }
         }
 
-        public static IWebElement GetElement(string xPathLocator)
+        public static IWebElement GetElement(IWebDriver driver, string xPathLocator)
         {
-            try
-            {
-                BaseElement element = new BaseElement(xPathLocator);
-                return element;
-            }
-            catch (NoSuchElementException)
-            {
-                return null;
-            }
-        }
-        //public void WaitElement(By locator) //IWebElement
-        //{
+			return GetElement(driver, By.XPath(xPathLocator));
+		}
+		public static IWebElement WaitElement(IWebDriver driver, By locator, int timeoutsec)
+		{
+			new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutsec)).Until(driv => driv.FindElement(locator));
+			return driver.FindElement(locator);
+		}
 
-        //пока не найдем элемент - кол-во циклов по секундам
-        //}
-
-        //isElementDisplayed
-    }
-}
+			//isElementDisplayed
+		}
+	}

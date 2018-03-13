@@ -73,6 +73,10 @@
     <Compile Include="UIUtils\Driver\BaseElement.cs" />
     <Compile Include="UIUtils\Driver\Browser.cs" />
     <Compile Include="UIUtils\Driver\BrowserFactory.cs" />
+    <Compile Include="UIUtils\Driver\Chrome.cs" />
+    <Compile Include="UIUtils\Driver\DriverFactory.cs" />
+    <Compile Include="UIUtils\Driver\Firefox.cs" />
+    <Compile Include="UIUtils\Driver\IBrowser.cs" />
     <Compile Include="UIUtils\Driver\SearchElementUtil.cs" />
     <Compile Include="UIUtils\PageObjects\ActivityPage.cs" />
     <Compile Include="UIUtils\PageObjects\IssuePage.cs" />
@@ -87,7 +91,7 @@
     <Compile Include="Utils\ILogger.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\RedmineNavigation.cs" />
-    <Compile Include="Utils\RandomGenerator.cs" />
+    <Compile Include="Utils\ExtensionStringRandom.cs" />
     <Compile Include="Steps\LoginSteps.cs" />
   </ItemGroup>
   <ItemGroup>

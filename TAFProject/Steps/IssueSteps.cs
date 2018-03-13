@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TAFProject.Models;
+﻿using TAFProject.Models;
+using TAFProject.UIUtils.Driver;
 using TAFProject.UIUtils.PageObjects;
 using TAFProject.Utils;
 
@@ -11,10 +7,11 @@ namespace TAFProject.Steps
 {
 	public static class IssueSteps
 	{
-		public static void AddIssue(string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
+		public static void AddIssue(IBrowser browser, string projectIdentifier, string issueSubject, IssueType type = IssueType.Default, string issueDescription = "",
 			IssueStatus status = IssueStatus.Default, IssuePriority priority = IssuePriority.Default)
 		{
-			var newIssue = RedmineNavigation.GoTo<NewIssuePage>(Pages.TemplateNewIssue, projectIdentifier);
+			var newIssue = RedmineNavigation.GoTo<NewIssuePage>(browser, Pages.TemplateNewIssue, projectIdentifier);
+			newIssue.driver = browser.Driver;////Navigation problems
 			newIssue.SelectType(type);
 			newIssue.SetSubject(issueSubject);
 			newIssue.SetDescription(issueDescription);
@@ -23,11 +20,11 @@ namespace TAFProject.Steps
 			newIssue.ClickCreate();
 		}
 
-		public static bool IsIssueCreated(string projectIdentifier, string issueName)
+		public static bool IsIssueCreated(IBrowser browser, string projectIdentifier, string issueName)
 		{
-			var activity = RedmineNavigation.GoTo<ActivityPage>(Pages.TemplateActivity, projectIdentifier);
-		//	ActivityPage page = new ActivityPage();
-			return activity.IsIssueCreated(issueName); //name or number of issue?
+			var activity = RedmineNavigation.GoTo<ActivityPage>(browser, Pages.TemplateActivity, projectIdentifier);
+			activity.driver = browser.Driver;//Navigation problems
+			return activity.IsIssueCreated(browser.Driver, issueName); //name or number of issue?
 		}
 	}
 }

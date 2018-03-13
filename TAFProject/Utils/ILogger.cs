@@ -1,5 +1,4 @@
 ﻿
-
 namespace TAFProject.Utils
 {
 	public interface ILogger
@@ -7,6 +6,5 @@ namespace TAFProject.Utils
 		void InitLogger();
 
 		void Info(string info);
-		//	ILog log;
 	}
 }

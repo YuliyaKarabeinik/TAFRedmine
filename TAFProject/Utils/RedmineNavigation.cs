@@ -10,7 +10,6 @@ namespace TAFProject.Utils
     }
     static class RedmineNavigation
     {
-        static Browser browser = Browser.Instance;
         public static string CurrentUrl { get; private set; }
         private static int IssueNumber { get; }
 
@@ -27,12 +26,12 @@ namespace TAFProject.Utils
             { Pages.TemplateIssues, "http://icerow.com/projects/{0}/issues"}
         };
 
-        public static TPage GoTo<TPage>(Pages page, string projectIdentifier = "") where TPage : BasePage, new()
-        {
+        public static TPage GoTo<TPage>(IBrowser browser, Pages page, string projectIdentifier = "") where TPage : BasePage, new()
+		{ 
             var nextUrl = projectIdentifier == string.Empty ? urls[page] : string.Format(urls[page], projectIdentifier);
             browser.GoToUrl(nextUrl);
             CurrentUrl = nextUrl;
-            return new TPage();
+			return new TPage();
         }
 
         public static bool IsOnPage(Pages page) => CurrentUrl == urls[page];

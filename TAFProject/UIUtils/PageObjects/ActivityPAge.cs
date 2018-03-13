@@ -7,11 +7,14 @@ namespace TAFProject.UIUtils.PageObjects
     class ActivityPage : BasePage
     {
         static readonly By activityContentLocator = By.Id("activity");
-        BaseElement activityContent;
+        IWebElement activityContent;
 
-        public bool IsIssueCreated(string issueName)
+		public ActivityPage() { }
+		public ActivityPage(IWebDriver driver) : base(driver){}
+
+        public bool IsIssueCreated(IWebDriver driver, string issueName)
         {
-            activityContent = SearchElementUtil.GetElement(activityContentLocator);
+            activityContent = (BaseElement) SearchElementUtil.GetElement(driver, activityContentLocator);
 			return activityContent.FindElements(By.XPath("//dt//a")).Any(element => element.Text.Contains(issueName));
         }
     }

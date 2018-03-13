@@ -1,18 +1,20 @@
-﻿using System.Threading;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using TAFProject.Steps;
 using TAFProject.Utils;
+using TAFProject.UIUtils.Driver;
+using TAFProject.Models;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestFixture, Parallelizable(ParallelScope.All)]
     class AddIssueTest : BaseTest
     {
 		[SetUp]
 		public void LogIn()
 		{
+			browser = BrowserFactory.GetBrowser(Enums.BrowserType.Chrome, Configuration.ElementTimeout);
 			browser.GoToUrl(Configuration.StartUrl);
-			LoginSteps.Login(user.UserName, user.Password);
+			LoginSteps.Login(browser, user.UserName, user.Password);
 		}
 
 		
@@ -22,8 +24,8 @@ namespace Tests
 		[Test]
 		public void AddIssuePositiveTest()
 		{
-			IssueSteps.AddIssue(projectIdentifier, issueSubject);
-			Assert.IsTrue(IssueSteps.IsIssueCreated(projectIdentifier,issueSubject));
+			IssueSteps.AddIssue(browser, projectIdentifier, issueSubject);
+			Assert.IsTrue(IssueSteps.IsIssueCreated(browser, projectIdentifier, issueSubject));
 		}
 
 		[TearDown]

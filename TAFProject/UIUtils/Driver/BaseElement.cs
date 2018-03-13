@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Drawing;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace TAFProject.UIUtils.Driver
 {
     class BaseElement : IWebElement
     {
-        readonly Browser browser = Browser.Instance;
-
+		readonly IWebDriver driver;
 	    readonly By locator;
         IWebElement element;
+		readonly int timeoutsec = 10;
 
         public string Text => element.Text;
 
@@ -27,17 +25,15 @@ namespace TAFProject.UIUtils.Driver
 
         public bool Displayed => element.Displayed;
 
-        public BaseElement(By locator)
+        public BaseElement(IWebDriver driver, By locator)
         {
             this.locator = locator;
-            element = browser.FindElement(locator);
+			this.driver = driver;
+            element = driver.FindElement(locator);
         }
 
-        public BaseElement(string xpathLocator)
-        {
-            this.locator = By.XPath(xpathLocator);
-            element = browser.FindElement(locator);
-        }
+        public BaseElement(IWebDriver driver, string xpathLocator):
+			this(driver, By.XPath(xpathLocator)){ }
 
         public BaseElement(IWebElement element)
         {
@@ -46,14 +42,14 @@ namespace TAFProject.UIUtils.Driver
 
         public void SendKeys(string text)
         {
-            new WebDriverWait(browser.Driver, TimeSpan.FromSeconds(browser.ImpWait)).Until(driver => driver.FindElement(locator));
-            element.SendKeys(text);
+			SearchElementUtil.WaitElement(driver, locator, timeoutsec);
+			element.SendKeys(text);
         }
 
         public void Click()
         {
-            new WebDriverWait(browser.Driver, TimeSpan.FromSeconds(browser.ImpWait)).Until(driver => driver.FindElement(locator));
-            element.Click();
+			SearchElementUtil.WaitElement(driver, locator, timeoutsec);
+			element.Click();
         }
 
         public bool IsExist()

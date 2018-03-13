@@ -19,24 +19,29 @@ namespace TAFProject.UIUtils.PageObjects
 
         BaseElement textboxProjectName, textboxProjectDescription, textboxProjectIdentifier, textboxHomepage,
             checkboxPublic, comboboxSubOf, checkboxInheritMembers, buttonCreate;
+		BaseElement notificationAboutCreation;
 
-        BaseElement notificationAboutCreation;
+		public NewProjectPage()
+		{
+
+		}
+		public NewProjectPage(IWebDriver driver):base(driver){}
 
         public NewProjectPage SetName(string projectName)
         {
-            textboxProjectName = SearchElementUtil.GetElement(locatorTextboxProjectName);
+            textboxProjectName = (BaseElement)SearchElementUtil.GetElement(driver, locatorTextboxProjectName);
             textboxProjectName.SendKeys(projectName);
             return this;
         }
         public NewProjectPage SetDescription(string projectDescription)
         {
-            textboxProjectDescription = SearchElementUtil.GetElement(locatorTextboxProjectDescription);
+            textboxProjectDescription = (BaseElement)SearchElementUtil.GetElement(driver, locatorTextboxProjectDescription);
             textboxProjectDescription.SendKeys(projectDescription);
             return this;
         }
         public NewProjectPage SetIdentifier(string projectIdentifier)
         {
-            textboxProjectIdentifier = SearchElementUtil.GetElement(locatorTextboxProjectIdentifier);
+            textboxProjectIdentifier = (BaseElement)SearchElementUtil.GetElement(driver, locatorTextboxProjectIdentifier);
             textboxProjectIdentifier.Clear();
             textboxProjectIdentifier.SendKeys(projectIdentifier);
             return this;
@@ -44,14 +49,14 @@ namespace TAFProject.UIUtils.PageObjects
 
         public NewProjectPage SetHomepage(string homepage)
         {
-            textboxHomepage = SearchElementUtil.GetElement(locatorTextboxHomepage);
+            textboxHomepage = (BaseElement)SearchElementUtil.GetElement(driver, locatorTextboxHomepage);
             textboxHomepage.SendKeys(homepage);
             return this;
         }
 
         public NewProjectPage SelectPublic(bool tickParam = true)
         {
-            checkboxPublic = SearchElementUtil.GetElement(locatorCheckboxPublic);
+            checkboxPublic = (BaseElement)SearchElementUtil.GetElement(driver, locatorCheckboxPublic);
             if (tickParam)
                 checkboxPublic.Check();
             else
@@ -61,7 +66,7 @@ namespace TAFProject.UIUtils.PageObjects
 
         public NewProjectPage SelectInheritMembers(bool tickParam = true)
         {
-            checkboxInheritMembers = SearchElementUtil.GetElement(locatorCheckboxInheritMembers);
+            checkboxInheritMembers = (BaseElement)SearchElementUtil.GetElement(driver, locatorCheckboxInheritMembers);
             if (tickParam)
                 checkboxInheritMembers.Check();
             else
@@ -71,7 +76,7 @@ namespace TAFProject.UIUtils.PageObjects
 
         public NewProjectPage ClickCreate()
         {
-            buttonCreate = SearchElementUtil.GetElement(locatorButtonCreate);
+            buttonCreate = (BaseElement)SearchElementUtil.GetElement(driver, locatorButtonCreate);
             buttonCreate.Click();
             return this;
         }
@@ -79,14 +84,14 @@ namespace TAFProject.UIUtils.PageObjects
         public string GetNotificationAboutCreationText()
         {
             if (!IsSuccessfulCreation())
-                notificationAboutCreation = SearchElementUtil.GetElement(locatorNegativeNotification);
+                notificationAboutCreation = (BaseElement)SearchElementUtil.GetElement(driver, locatorNegativeNotification);
             return notificationAboutCreation.Text;
         }
 
        
         public bool IsSuccessfulCreation()
         {
-            notificationAboutCreation = SearchElementUtil.GetElement(locatorPositiveNotification);
+            notificationAboutCreation = (BaseElement)SearchElementUtil.GetElement(driver, locatorPositiveNotification);
             return notificationAboutCreation!=null && notificationAboutCreation.Displayed;
         }
 
@@ -95,7 +100,7 @@ namespace TAFProject.UIUtils.PageObjects
 	    {
 		    if (IsSuccessfulCreation())
 			    return Enums.Notifications.Positive;
-		    notificationAboutCreation = SearchElementUtil.GetElement(locatorNegativeNotification);
+		    notificationAboutCreation = (BaseElement)SearchElementUtil.GetElement(driver, locatorNegativeNotification);
 		    return Enums.Notifications.Negative;
 	    }
 

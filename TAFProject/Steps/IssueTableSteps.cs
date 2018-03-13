@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TAFProject.Models;
+﻿using TAFProject.Models;
+using TAFProject.UIUtils.Driver;
 using TAFProject.UIUtils.PageObjects;
 
 namespace TAFProject.Steps
 {
 	public static class IssueTableSteps
 	{
-
-		public static void IssueTable()
+		public static void SortIssueTableBy(IBrowser browser)
 		{
-			IssuePage page = new IssuePage();
+			IssuePage page = new IssuePage(browser.Driver);
 			Issue issue = page.Table[1];
+			//continue...
 		}
 	}
 }

@@ -7,5 +7,10 @@ namespace TAFProject.Models
         {
             Positive, Negative
         }
-    }
+		public enum BrowserType
+		{
+			Chrome,
+			Firefox
+		}
+	}
 }

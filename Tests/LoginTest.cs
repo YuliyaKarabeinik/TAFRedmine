@@ -3,7 +3,7 @@ using NUnit.Framework.Internal;
 using TAFProject.Models;
 using TAFProject.Steps;
 using TAFProject.UIUtils.Driver;
-using TAFProject.UIUtils.PageObjects;
+using TAFProject.Utils;
 
 namespace Tests
 {
@@ -14,8 +14,10 @@ namespace Tests
         [SetUp]
         public void InitTest()
         {
-			if (LoginSteps.IsLogIn())
-                LoginSteps.LogOut();
+			browser = BrowserFactory.GetBrowser(Enums.BrowserType.Chrome, Configuration.ElementTimeout);
+			browser.GoToUrl(Configuration.StartUrl);
+			if (LoginSteps.IsLogIn(browser))
+                LoginSteps.LogOut(browser);
 	        logger.Info("Logout");
 	        
 		}
@@ -24,8 +26,8 @@ namespace Tests
         public void CorrectLoginTest()
         {
 	        logger.Info($"Test LogIn started with parameters:\n login: {user.UserName}, password {user.Password}");
-			LoginSteps.Login(user.UserName, user.Password);
-            Assert.True(LoginSteps.IsLogIn(user.UserName));
+			LoginSteps.Login(browser, user.UserName, user.Password);
+            Assert.True(LoginSteps.IsLogIn(browser, user.UserName));
 		}
 	    [TearDown]
 	    public void CloseTest()

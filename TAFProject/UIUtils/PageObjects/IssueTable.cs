@@ -1,9 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using System.Collections.Generic;
-using System.Web.Query.Dynamic;
 using TAFProject.Models;
-using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
@@ -14,23 +12,16 @@ namespace TAFProject.UIUtils.PageObjects
 
     class IssueTable
     {
-        //IssuePage.Table[1]->issue
-        //Table.Sort {return new issueTable;}
+        IWebElement tableElement;
+		IWebElement columnSortBy;
 
-        //static readonly string issueTableXPathLocator = "//div[@id='content']//table";
-        //private IWebElement table;
+		static readonly string templateIssueFromTableLocator = "//tbody//tr[@id='issue-{0}']";
         
-        Browser browser = Browser.Instance;
-        static readonly string templateIssueFromTableLocator = "//tbody//tr[@id='issue-{0}']";
-        readonly By locator;
-        
-        BaseElement columnSortBy;
-
         public Issue this[int issueNumber]
         {
             get
             {
-                IWebElement tableRow = browser.FindElement(By.XPath(string.Format(templateIssueFromTableLocator, issueNumber)));
+                IWebElement tableRow = tableElement.FindElement(By.XPath(string.Format(templateIssueFromTableLocator, issueNumber)));
                 return new Issue
                 {
                     //Number = int.Parse(tableRow.FindElement(By.XPath("//td[@class='id']")).Text),
@@ -45,33 +36,31 @@ namespace TAFProject.UIUtils.PageObjects
             }
         }
 
-        public IssueTable(By locator)
+        public IssueTable(IWebElement tableElement)
         {
-            this.locator = locator;
-            //table = browser.FindElement(locator);
+            this.tableElement = tableElement;
         }
 
         public IssueTable SortBy(Columns column)
         {
             columnSortBy = column == Columns.Number ? FindColumn("#") : FindColumn(column.ToString());
             columnSortBy.Click();
-            return new IssueTable(locator);
+            return new IssueTable(tableElement);
         }
 
         public List<string> GetListOf(Columns column)
         {
             List<string> list = new List<string>();
-            foreach (IWebElement subjectElement in browser.Driver.FindElements(By.XPath($"//tbody//td[@class='{column.ToString().ToLower()}']")))//LINQ   //для # подходит??
+            foreach (IWebElement subjectElement in tableElement.FindElements(By.XPath($"//tbody//td[@class='{column.ToString().ToLower()}']")))//LINQ   //для # подходит??
             {
                 list.Add(subjectElement.Text);
             }
             return list;
         }
 
-        private BaseElement FindColumn(string columnName)
+        private IWebElement FindColumn(string columnName)
         {
-            return new BaseElement(browser.FindElement(By.XPath($"//th[@title='Sort by \"{columnName}\"']")));
-        }
-        
+            return tableElement.FindElement(By.XPath($"//th[@title='Sort by \"{columnName}\"']"));
+        }        
     }
 }

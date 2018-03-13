@@ -9,9 +9,10 @@ namespace TAFProject.UIUtils.PageObjects
 						   logoutLocator = By.XPath("//a[@class='logout']");
         BaseElement logout, loginIdentifier;
 
-        public HomePage()
+		public HomePage() { }
+		public HomePage(IWebDriver driver) : base(driver)
         {
-            loginIdentifier = SearchElementUtil.GetElement(loginIdentifierLocator);
+            loginIdentifier = (BaseElement)SearchElementUtil.GetElement(driver, loginIdentifierLocator);
         }
 
         public string GetCurrentUser() => loginIdentifier.Text;
@@ -25,7 +26,7 @@ namespace TAFProject.UIUtils.PageObjects
 
         public LoginPage LogoutHomePage()
         {
-            logout = SearchElementUtil.GetElement(logoutLocator);
+            logout = (BaseElement)SearchElementUtil.GetElement(driver, logoutLocator);
             logout.Click();
             return new LoginPage();
         }

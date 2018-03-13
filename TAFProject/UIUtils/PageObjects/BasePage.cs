@@ -1,17 +1,18 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
 using TAFProject.UIUtils.Driver;
 
 namespace TAFProject.UIUtils.PageObjects
 {
     public abstract class BasePage
     {
-        protected Browser browser = Browser.Instance;
-        protected BasePage()
+		private int timeout = 10;
+        public IWebDriver driver { get; set; }
+		public BasePage() { }
+
+		public BasePage(IWebDriver driver)
         {
-            new WebDriverWait(browser.Driver, TimeSpan.FromSeconds(browser.ImpWait)).
-                Until(driver => driver.FindElement(By.XPath("//title")));//WaitElement
-        }
+			this.driver = driver;
+			SearchElementUtil.WaitElement(driver, By.XPath("//title"), timeout);
+		}
     }
 }

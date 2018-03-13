@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace TAFProject.UIUtils.PageObjects
 {
@@ -11,7 +6,10 @@ namespace TAFProject.UIUtils.PageObjects
     {
         static readonly string issueTableXPathLocator = "//div[@id='content']//table";
 
-        public IssueTable Table => new IssueTable(By.XPath(issueTableXPathLocator));
+		public IssuePage() { }
+		public IssuePage(IWebDriver driver) : base(driver){ }
+	
+        public IssueTable Table => new IssueTable(driver.FindElement(By.XPath(issueTableXPathLocator)));
 
     }
 }

@@ -1,23 +1,18 @@
 ﻿using OpenQA.Selenium;
-using TAFProject.Utils;
+using TAFProject.Models;
 
 namespace TAFProject.UIUtils.Driver
 {
     public class Browser
     {
-        static Browser _instance;
-        BrowserType browserTypeFromConfig;
         public int ImpWait { get; }
         public IWebDriver Driver { get; private set; }
 
-        private Browser()
+        public Browser(IWebDriver driver, int timeout, Enums.BrowserType type)
         {
-            ImpWait = Configuration.ElementTimeout;//не должно быть обращения к Config!
-            browserTypeFromConfig = Configuration.Browser;
-            Driver = BrowserFactory.GetDriver(browserTypeFromConfig, ImpWait);
+			Driver = driver;
+            Driver = DriverFactory.GetDriver(type, timeout);
         }
-
-        public static Browser Instance => _instance ?? (_instance = new Browser());
 
         public void WindowMaximise()
         {
@@ -42,7 +37,6 @@ namespace TAFProject.UIUtils.Driver
         public void Quit()
         {
             Driver.Quit();
-            _instance = null;
             Driver = null;
         }
     }

@@ -1,32 +1,31 @@
-﻿using TAFProject.Models;
+﻿using TAFProject.UIUtils.Driver;
 using TAFProject.UIUtils.PageObjects;
-using TAFProject.Utils;
 
 namespace TAFProject.Steps
 {
     public static class LoginSteps
     {
-        public static void Login(string login, string password)
+        public static void Login(IBrowser browser, string login, string password)
         {
-            LoginPage loginPage = new LoginPage();
+            LoginPage loginPage = new LoginPage(browser.Driver);
             loginPage.SetUser(login);
             loginPage.SetPassword(password);
             loginPage.ClickSubmit();
-            RedmineNavigation.GoTo<HomePage>(Pages.Home);
+            //RedmineNavigation.GoTo<HomePage>(browser, Pages.Home);
         }
 
-        public static bool IsLogIn(string user = "")
+        public static bool IsLogIn(IBrowser browser, string user = "")
         {
-            HomePage homepage = new HomePage();
+            HomePage homepage = new HomePage(browser.Driver);
             if (user == string.Empty)
                 return homepage.IsLogIn();
 
             return homepage.GetCurrentUser() == user;
         }
 
-        public static void LogOut()
+        public static void LogOut(IBrowser browser)
         {
-            HomePage homepage = new HomePage();
+            HomePage homepage = new HomePage(browser.Driver);
             homepage.LogoutHomePage();
         }
 		

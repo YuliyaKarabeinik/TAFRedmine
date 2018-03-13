@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TAFProject.UIUtils.Driver;
 using TAFProject.UIUtils.PageObjects;
 using TAFProject.Utils;
 
@@ -10,23 +6,24 @@ namespace TAFProject.Steps
 {
 	public static class ProjectSteps
 	{
-		public static void AddProject(string projectName, string projectIdentifier)
+		public static void AddProject(IBrowser browser, string projectName, string projectIdentifier)
 		{
-			var newProject = RedmineNavigation.GoTo<NewProjectPage>(Pages.NewProject);
+			var newProject = RedmineNavigation.GoTo<NewProjectPage>(browser, Pages.NewProject);
+			newProject.driver = browser.Driver;
 			newProject.SetName(projectName);
 			newProject.SetIdentifier(projectIdentifier);
 			newProject.ClickCreate();
 		}
 
-		public static bool IsProjectCreated()
+		public static bool IsProjectCreated(IBrowser browser)
 		{
-			NewProjectPage page = new NewProjectPage();
+			NewProjectPage page = new NewProjectPage(browser.Driver);
 			return page.IsSuccessfulCreation();
 		}
 
-		public static bool IsProjectCreated(out string notificationText)
+		public static bool IsProjectCreated(IBrowser browser, out string notificationText)
 		{
-			NewProjectPage page = new NewProjectPage();
+			NewProjectPage page = new NewProjectPage(browser.Driver);
 			notificationText = page.GetNotificationAboutCreationText();
 			return page.IsSuccessfulCreation();
 		}

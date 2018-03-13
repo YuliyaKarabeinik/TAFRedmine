@@ -16,44 +16,50 @@ namespace TAFProject.UIUtils.PageObjects
         SelectElement comboboxIssueType, comboboxStatus, comboboxPriority;
         BaseElement textboxSubject, textboxDescription, buttonCreate;
 
+		public NewIssuePage()
+		{
+
+		}
+		public NewIssuePage(IWebDriver driver):base(driver){}
+
         public NewIssuePage SelectType(IssueType type)
         {
-            comboboxIssueType = new SelectElement(SearchElementUtil.GetElement(locatorComboboxIssueType));
+            comboboxIssueType = new SelectElement(SearchElementUtil.GetElement(driver, locatorComboboxIssueType));
             if (type != IssueType.Default)
                 comboboxIssueType.SelectByText(type.ToString().Replace(" ", ""));
             return this;
         }
         public NewIssuePage SetSubject(string issueSubject)
         {
-            textboxSubject = SearchElementUtil.GetElement(locatorTextboxSubject);
+            textboxSubject = (BaseElement)SearchElementUtil.GetElement(driver, locatorTextboxSubject);
             textboxSubject.SendKeys(issueSubject);
             return this;
         }
         public NewIssuePage SetDescription(string issueDescription)
         {
-            textboxDescription = SearchElementUtil.GetElement(locatorTextboxDescription);
+            textboxDescription = (BaseElement)SearchElementUtil.GetElement(driver, locatorTextboxDescription);
             textboxDescription.SendKeys(issueDescription);
             return this;
         }
         public NewIssuePage SelectStatus(IssueStatus status)
         {
-            comboboxStatus = new SelectElement(SearchElementUtil.GetElement(locatorComboboxStatus));
+            comboboxStatus = new SelectElement(SearchElementUtil.GetElement(driver, locatorComboboxStatus));
             if (status != IssueStatus.Default)
                 comboboxStatus.SelectByText(status.ToString().Replace(" ", ""));
             return this;
         }
         public NewIssuePage SelectPriority(IssuePriority priority)
         {
-            comboboxPriority = new SelectElement(SearchElementUtil.GetElement(locatorComboboxPriority));
+            comboboxPriority = new SelectElement(SearchElementUtil.GetElement(driver, locatorComboboxPriority));
             if (priority != IssuePriority.Default)
                 comboboxPriority.SelectByText(priority.ToString());
             return this;
         }
         public CreatedIssuePage ClickCreate()
         {
-            buttonCreate = SearchElementUtil.GetElement(locatorButtonCreate);
+            buttonCreate = (BaseElement)SearchElementUtil.GetElement(driver, locatorButtonCreate);
             buttonCreate.Click();
-            return new CreatedIssuePage();
+            return new CreatedIssuePage(driver);
         }
     }
 }
