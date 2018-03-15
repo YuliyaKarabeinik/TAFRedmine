@@ -39,7 +39,7 @@ namespace Tests
         public void CloseTest()
         {
             logger.Info($"Test finished with status: {TestExecutionContext.CurrentContext.CurrentResult.ResultState.Status}");
-            browser.Close();
+            browser.Quit();
         }
 
         [OneTimeTearDown]
